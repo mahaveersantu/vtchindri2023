@@ -86,59 +86,42 @@ public class AarthikSahyogController {
 
 	}
 
-	@RequestMapping("/saveAndUpdateArthikSahyog")
-	public String saveAndUpdateArthikSahyog(
-			@RequestBody AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity) {
-		String status;
-		AarthikSahyogAnnouncementEntity saved = new AarthikSahyogAnnouncementEntity();
-		if (arthikSahyogAnnouncementEntity.getAnnId() > 0) {
-			// ExpenditureEntity findById =
-			// expenditureRepo.findById(expenditureEntity.getExpdId()).get();
-			List<AarthikSahyogAnnouncementEntity> findByMobile = arthikSahyogAnnouncementRepo
-					.findAllByMobileAndAnnIdNot(arthikSahyogAnnouncementEntity.getMobile(),
-							arthikSahyogAnnouncementEntity.getAnnId());
-			if (findByMobile.size() > 0) {
-				status = "exist";
-			} else {
-				// arthikSahyogEntity.setAddedOn(LocalDate.now());
-				AarthikSahyogAnnouncementEntity aarthikSahyog = arthikSahyogAnnouncementRepo
-						.findById(arthikSahyogAnnouncementEntity.getAnnId()).get();
-				arthikSahyogAnnouncementEntity.setAddedOn(aarthikSahyog.getAddedOn());
-				saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity);
-				status = "success";
-			}
-
-		} else {
-			List<AarthikSahyogAnnouncementEntity> getData = arthikSahyogAnnouncementRepo
-					.findByMobile(arthikSahyogAnnouncementEntity.getMobile());
-			if (getData.size() == 0) {
-				arthikSahyogAnnouncementEntity.setAddedOn(LocalDate.now());
-
-				saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity);
-				// send sms to sahyogkrta
-				String name = null;
-				String sahyogkrta = null;
-				if (arthikSahyogAnnouncementEntity.getSmsName() == null) {
-					name = saved.getName();
-					if (name.contains(" ")) {
-						sahyogkrta = name.substring(0, name.indexOf(" ")) + " जी";
-					} else {
-						sahyogkrta = name + " जी ";
-					}
-				} else {
-					sahyogkrta = arthikSahyogAnnouncementEntity.getSmsName() + " Ji";
-				}
-				messageService.sendMessageToAnnouncement(sahyogkrta, saved.getAnnounceAmount(), saved.getMobile());
-				status = "success";
-			} else {
-				status = "exist";
-			}
-		}
-		if (saved == null) {
-			status = "fail";
-		}
-		return status;
-	}
+	/*
+	 * @RequestMapping("/saveAndUpdateArthikSahyog") public String
+	 * saveAndUpdateArthikSahyog(
+	 * 
+	 * @RequestBody AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity)
+	 * { String status; AarthikSahyogAnnouncementEntity saved = new
+	 * AarthikSahyogAnnouncementEntity(); if
+	 * (arthikSahyogAnnouncementEntity.getAnnId() > 0) { // ExpenditureEntity
+	 * findById = // expenditureRepo.findById(expenditureEntity.getExpdId()).get();
+	 * List<AarthikSahyogAnnouncementEntity> findByMobile =
+	 * arthikSahyogAnnouncementRepo
+	 * .findAllByMobileAndAnnIdNot(arthikSahyogAnnouncementEntity.getMobile(),
+	 * arthikSahyogAnnouncementEntity.getAnnId()); if (findByMobile.size() > 0) {
+	 * status = "exist"; } else { // arthikSahyogEntity.setAddedOn(LocalDate.now());
+	 * AarthikSahyogAnnouncementEntity aarthikSahyog = arthikSahyogAnnouncementRepo
+	 * .findById(arthikSahyogAnnouncementEntity.getAnnId()).get();
+	 * arthikSahyogAnnouncementEntity.setAddedOn(aarthikSahyog.getAddedOn()); saved
+	 * = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity); status =
+	 * "success"; }
+	 * 
+	 * } else { List<AarthikSahyogAnnouncementEntity> getData =
+	 * arthikSahyogAnnouncementRepo
+	 * .findByMobile(arthikSahyogAnnouncementEntity.getMobile()); if (getData.size()
+	 * == 0) { arthikSahyogAnnouncementEntity.setAddedOn(LocalDate.now());
+	 * 
+	 * saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity); //
+	 * send sms to sahyogkrta String name = null; String sahyogkrta = null; if
+	 * (arthikSahyogAnnouncementEntity.getSmsName() == null) { name =
+	 * saved.getName(); if (name.contains(" ")) { sahyogkrta = name.substring(0,
+	 * name.indexOf(" ")) + " जी"; } else { sahyogkrta = name + " जी "; } } else {
+	 * sahyogkrta = arthikSahyogAnnouncementEntity.getSmsName() + " Ji"; }
+	 * messageService.sendMessageToAnnouncement(sahyogkrta,
+	 * saved.getAnnounceAmount(), saved.getMobile()); status = "success"; } else {
+	 * status = "exist"; } } if (saved == null) { status = "fail"; } return status;
+	 * }
+	 */
 
 	@RequestMapping("/saveAndUpdateArthikSahyogReceipt")
 	public String saveAndUpdateArthikSahyogReceipt(@RequestBody AarthikSahyogEntity arthikSahyogEntity) {

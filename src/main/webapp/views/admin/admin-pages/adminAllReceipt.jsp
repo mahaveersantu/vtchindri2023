@@ -22,21 +22,15 @@
 
 		<div class="mt-1"></div>
 		<section id="featured-services" class="featured-services">
-<div class="d-flex justify-content-center"><h3 style="color: blue;" >-:आर्थिक सहयोग:-</h3></div>
-<div class="d-flex justify-content-center">
 
-<a href="${pageContext.request.contextPath}/adminAllReceipt" class="btn btn-success">-:सभी रशीद देखे:-</a>
-
-
-</div>
-
+<div class="d-flex justify-content-center"><h3 style="color: blue;" >-:सभी रशीदें :-</h3></div>
 
 </section>
 
 
 
-		<%@include file="../components/adminAddAnnouncement.jsp"%> 
-		 <%@include file="../components/aarthik-sahyog-detail.jsp"%>  
+		
+		 <%@include file="../components/all-receipt.jsp"%>  
 		<%-- <div class="mt-1"></div>
 		<%@include file="../components/aarthik-sahyog.jsp"%>  --%>
 		 

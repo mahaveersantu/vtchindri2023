@@ -41,18 +41,15 @@ public class UserController {
 		else
 			return "fail";
 	}
-	@RequestMapping("/logout")
-	public String adminLogout(HttpServletRequest request, HttpSession session,Model model)
-	{
-		
-		if(session.getAttribute("adminSession")!=null)
-		{
-			session.removeAttribute("adminSession");
-		}
-		request.getSession().invalidate();
-		
-		return "success";
-	}
+	/*
+	 * @RequestMapping("/logout") public String adminLogout(HttpServletRequest
+	 * request, HttpSession session,Model model) {
+	 * 
+	 * if(session.getAttribute("adminSession")!=null) {
+	 * session.removeAttribute("adminSession"); } request.getSession().invalidate();
+	 * 
+	 * return "success"; }
+	 */
 	
 	@RequestMapping("/adminDetails")
 	public UserEntity adminDetails(HttpServletRequest request, HttpSession session)

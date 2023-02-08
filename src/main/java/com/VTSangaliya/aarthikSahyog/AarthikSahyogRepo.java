@@ -12,4 +12,6 @@ public interface AarthikSahyogRepo extends JpaRepository<AarthikSahyogEntity, In
 
 	List<AarthikSahyogEntity> findByReceiptNo(String receiptNo);
 
+	List<AarthikSahyogEntity> findAllByOrderByReceiptNo();
+
 }
