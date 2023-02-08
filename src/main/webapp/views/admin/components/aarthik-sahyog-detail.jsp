@@ -21,6 +21,8 @@
             <th>Update </th>
             <th>Add Receipt </th>
             <th>रशीद विवरण </th>
+            
+            
            
             
         </tr>
