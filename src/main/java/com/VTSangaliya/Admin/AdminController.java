@@ -20,6 +20,8 @@ import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementEntity;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementRepo;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
 import com.VTSangaliya.citizen.SessionServices;
+import com.VTSangaliya.expenditure.ExpenditureCatEntity;
+import com.VTSangaliya.expenditure.ExpenditureCatRepo;
 import com.VTSangaliya.messages.MessageService;
 import com.VTSangaliya.user.UserEntity;
 import com.VTSangaliya.user.UserRepo;
@@ -35,6 +37,8 @@ public class AdminController {
 	private AarthikSahyogRepo aarthikSahyogRepo;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private ExpenditureCatRepo expenditureCatRepo;
 	int total = 0;
 	@Autowired
 	private AdminSessionServices sessionServices;
@@ -190,7 +194,25 @@ public class AdminController {
 		return mv;
 	}
 	
-	
+	@RequestMapping("/adminShowAllCat")
+	public ModelAndView getAllCategory() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/admin-pages/adminExpenditureCategory");
+	    mv.addObject("allCategories", expenditureCatRepo.findAll());
+		return mv;
+		
+	}
+	@RequestMapping("/adminSaveAndUpdateCategory")
+	public String saveAndUpdateCategory(ExpenditureCatEntity expenditureCatEntity) {
+		ExpenditureCatEntity saved = expenditureCatRepo.save(expenditureCatEntity);
+		if (saved != null) {
+			return "success";
+		} else {
+			return "fail";
+		}
+
+	}
 	
 	@RequestMapping("/logout")
 	public ModelAndView adminLogout(HttpServletRequest request, HttpSession session,Model model)

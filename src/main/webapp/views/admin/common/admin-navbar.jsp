@@ -50,7 +50,14 @@
               <li><a href="${pageContext.request.contextPath}/showGairAarthikSahyog">गैर आर्थिक</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto " href="${pageContext.request.contextPath}/showKharcha">खर्च</a></li>
+          
+          <li class="dropdown"><a  href="#"><span>खर्च</span><i class="bi bi-chevron-down"></i></a>
+          <ul>
+          <li><a class="nav-link scrollto " href="${pageContext.request.contextPath}/adminShowAllCat">खर्च श्रेणिया</a></li>
+          <li><a class="nav-link scrollto " href="${pageContext.request.contextPath}/showKharcha">खर्च विवरण</a></li>
+        </ul>
+          </li>
+          
           
            <li class="dropdown"><a href="#"><span>ट्रस्ट</span> <i class="bi bi-chevron-down"></i></a>
             <ul>

@@ -56,7 +56,7 @@
 					<td>Edit</td>
 					<td>Delete</td>
 					
-					</td>
+					
 					</tr>					
 												</c:forEach>
 												</table>
@@ -71,11 +71,6 @@
 <script type="text/javascript">
 $(document).ready( function () {
     $('#myTable').DataTable();
-    $("#updateAnn").click(function(){
-    	var a = $(this).parents("tr").find(".name").text();
-    	alert(a);
-    	//$('#addAnnModal').modal('show');
-    	  
-    	});
+   
 } );
 </script>
