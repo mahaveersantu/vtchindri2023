@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -114,8 +115,9 @@ public class AdminController {
 		
 	}
 	
-	@RequestMapping("/saveAndUpdateArthikSahyog")
-	public ModelAndView saveAndUpdateArthikSahyog(AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity, MultipartFile sahyogkrta_photo, HttpSession session) throws IOException {
+	@PostMapping("/saveAndUpdateArthikSahyog")
+	public ModelAndView saveAndUpdateArthikSahyog(@RequestParam(required = false, value="sahyogkrta_photo") MultipartFile sahyogkrta_photo,AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity,
+			 HttpSession session) throws IOException {
 		String status;
 		AarthikSahyogAnnouncementEntity saved = new AarthikSahyogAnnouncementEntity();
 		if (arthikSahyogAnnouncementEntity.getAnnId() > 0) {
@@ -131,9 +133,17 @@ public class AdminController {
 				AarthikSahyogAnnouncementEntity aarthikSahyog = arthikSahyogAnnouncementRepo
 						.findById(arthikSahyogAnnouncementEntity.getAnnId()).get();
 				arthikSahyogAnnouncementEntity.setAddedOn(aarthikSahyog.getAddedOn());
-				if(sahyogkrta_photo.getSize()>1)
+				System.out.println("photo size ");
+				System.out.println("photo size "+sahyogkrta_photo);
+				if(sahyogkrta_photo!=null)
 				{
+					if (sahyogkrta_photo.getContentType().contains("jpg") || sahyogkrta_photo.getContentType().contains("jpeg"))
+					  {
 					arthikSahyogAnnouncementEntity.setPhoto(sahyogkrta_photo.getBytes());
+					  }
+					else {
+						  status="invalid_photo";  
+					  }
 				}
 				
 				
@@ -149,7 +159,7 @@ public class AdminController {
 
 				System.out.println("size of photo is "+sahyogkrta_photo.getSize());
 				
-				  if(sahyogkrta_photo.getSize()>1) {
+				  if(sahyogkrta_photo!=null) {
 					  if (sahyogkrta_photo.getContentType().contains("jpg") || sahyogkrta_photo.getContentType().contains("jpeg"))
 					  {
 				  arthikSahyogAnnouncementEntity.setPhoto(sahyogkrta_photo.getBytes());

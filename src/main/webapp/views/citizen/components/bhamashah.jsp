@@ -19,7 +19,8 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
-                <img src="assets/img/team/dummy.png" class="img-fluid" alt="">
+                <!-- <img src="assets/img/team/dummy.png" class="img-fluid" alt=""> -->
+                <img src="data:image/img;base64,${TopTenBhamashah.photo} " class="img-fluid" alt="">
                 <div class="social">
                   <h4>${TopTenBhamashah.address}</h4>
                 </div>

@@ -5,7 +5,7 @@
 			<div class="modal-header ">
 				<div class="modal-title d-flex justify-content-center">
 
-					<h5>Add Announcement</h5>
+					<h5 id="modaltitle"></h5>
 				</div>
 
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -23,31 +23,37 @@
 								<div>
 
 									<p>Fill in the data below.</p>
-									<form action="${pageContext.request.contextPath}/saveAndUpdateArthikSahyog" method="post" enctype="multipart/form-data">
+									<form action="${pageContext.request.contextPath}/saveAndUpdateArthikSahyog" 
+									method="POST" enctype="multipart/form-data">
 
 										<div class="col-md-12">
+										<input class="form-control" type="hidden" name="annId"
+												placeholder="Full Name" required id="annId">
 											<input class="form-control" type="text" name="name"
-												placeholder="Full Name" required>
+												placeholder="Full Name" required id="nameE">
 
 										</div>
 
 										<div class="col-md-12">
 											<input class="form-control" type="text" name="address"
-												placeholder="Address" required>
+												placeholder="Address" required id="addressE">
 
 										</div>
 										<div class="col-md-12">
 											<input class="form-control" type="text" name="mobile"
-												placeholder="Mobile No" required>
+												placeholder="Mobile No" required id="mobileE">
 
 										</div>
 										<div class="col-md-12">
 											<input class="form-control" type="text" name="announceAmount"
-												placeholder="announceAmount" required>
+												placeholder="announceAmount" required id="annouceE">
 
 										</div>
 										<div class="col-md-12  mt-3">
-											 <input class="form-control" type="file" placeholder="Photo" name="sahyogkrta_photo">
+											 <input  type="file" placeholder="Photo" 
+											 name="sahyogkrta_photo"
+											 
+											 >
 										</div>
 									
 										<div class="form-button mt-3">
@@ -69,7 +75,7 @@
 </div>
 
 <div class="text-center">
-	<button data-bs-toggle="modal" data-bs-target="#addAnnModal">Add
+	<button onclick="addAnnoucement()">Add
 		Announcement</button>
 
 
@@ -81,5 +87,18 @@
 			backdrop : 'static',
 			keyboard : false
 		})
+		
+		
 	});
+	function addAnnoucement()
+	{
+		$("#nameE").val("");
+		$("#addressE").val("");
+		$("#mobileE").val("");
+		$("#annouceE").val("");
+		$("#annId").val("");
+		$("#modaltitle").html("Add Announcement");
+		
+		$('#addAnnModal').modal('show');
+	}
 </script>

@@ -40,8 +40,10 @@
             <td>${allAnnouncement.announceAmount }</td>
             <td>${allAnnouncement.grandTotal }</td>
             <td>${allAnnouncement.pendingAmount }</td>
-            <td><button  id="updateAnn">Update
-		Ann</button></td>
+            <td>
+            <button id="updateBtn" type="button" onclick="updateAnn('${allAnnouncement.annId }','${allAnnouncement.name }',
+            '${allAnnouncement.address }','${allAnnouncement.mobile }','${allAnnouncement.announceAmount }')">Update</button>
+      </td>
             <td>Add Receipt</td>
           <td>
           <table>
@@ -56,7 +58,7 @@
 					<td>Edit</td>
 					<td>Delete</td>
 					
-					
+				
 					</tr>					
 												</c:forEach>
 												</table>
@@ -71,6 +73,18 @@
 <script type="text/javascript">
 $(document).ready( function () {
     $('#myTable').DataTable();
-   
+    
+
 } );
+function updateAnn(annId,name,address,mobile,amount)
+{
+	$("#nameE").val(name);
+	$("#addressE").val(address);
+	$("#mobileE").val(mobile);
+	$("#annouceE").val(amount);
+	$("#annId").val(annId);
+	$("#modaltitle").html("Update Announcement");
+	 $('#addAnnModal').modal('show'); 
+	}
+
 </script>
