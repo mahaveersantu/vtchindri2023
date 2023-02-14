@@ -23,7 +23,7 @@
 								<div>
 
 									<p>Fill in the data below.</p>
-									<form action="${pageContext.request.contextPath}/saveAndUpdateArthikSahyog" method="post">
+									<form action="${pageContext.request.contextPath}/saveAndUpdateArthikSahyog" method="post" enctype="multipart/form-data">
 
 										<div class="col-md-12">
 											<input class="form-control" type="text" name="name"
@@ -47,8 +47,7 @@
 
 										</div>
 										<div class="col-md-12  mt-3">
-											 <input class="form-control" type="file" placeholder="Photo"
-												id="formFile">
+											 <input class="form-control" type="file" placeholder="Photo" name="sahyogkrta_photo">
 										</div>
 									
 										<div class="form-button mt-3">

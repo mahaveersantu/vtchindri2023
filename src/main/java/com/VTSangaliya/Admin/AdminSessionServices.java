@@ -68,10 +68,12 @@ public class AdminSessionServices {
 		int i = 0;
 		for (AarthikSahyogAnnouncementEntity aarthikSahyogAnnouncementEntity : findAll) {
 			total = 0;
-
+if(aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity()!=null)
+{
 			aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity().forEach(e -> {
 				total += e.getAmount();
 			});
+}
 			i++;
 
 			aarthikSahyogAnnouncementEntity

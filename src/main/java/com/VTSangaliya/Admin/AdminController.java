@@ -1,5 +1,6 @@
 package com.VTSangaliya.Admin;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementEntity;
@@ -109,7 +111,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/saveAndUpdateArthikSahyog")
-	public ModelAndView saveAndUpdateArthikSahyog(AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity,HttpSession session) {
+	public ModelAndView saveAndUpdateArthikSahyog(AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity, MultipartFile sahyogkrta_photo, HttpSession session) throws IOException {
 		String status;
 		AarthikSahyogAnnouncementEntity saved = new AarthikSahyogAnnouncementEntity();
 		if (arthikSahyogAnnouncementEntity.getAnnId() > 0) {
@@ -125,6 +127,12 @@ public class AdminController {
 				AarthikSahyogAnnouncementEntity aarthikSahyog = arthikSahyogAnnouncementRepo
 						.findById(arthikSahyogAnnouncementEntity.getAnnId()).get();
 				arthikSahyogAnnouncementEntity.setAddedOn(aarthikSahyog.getAddedOn());
+				if(sahyogkrta_photo.getSize()>1)
+				{
+					arthikSahyogAnnouncementEntity.setPhoto(sahyogkrta_photo.getBytes());
+				}
+				
+				
 				saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity);
 				status = "success";
 			}
@@ -135,6 +143,18 @@ public class AdminController {
 			if (getData.size() == 0) {
 				arthikSahyogAnnouncementEntity.setAddedOn(LocalDate.now());
 
+				System.out.println("size of photo is "+sahyogkrta_photo.getSize());
+				
+				  if(sahyogkrta_photo.getSize()>1) {
+					  if (sahyogkrta_photo.getContentType().contains("jpg") || sahyogkrta_photo.getContentType().contains("jpeg"))
+					  {
+				  arthikSahyogAnnouncementEntity.setPhoto(sahyogkrta_photo.getBytes());
+				  }
+					  else {
+						  status="invalid_photo";  
+					  }
+				  }
+				 
 				saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity);
 				// send sms to sahyogkrta
 				String name = null;

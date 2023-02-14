@@ -40,7 +40,8 @@
             <td>${allAnnouncement.announceAmount }</td>
             <td>${allAnnouncement.grandTotal }</td>
             <td>${allAnnouncement.pendingAmount }</td>
-            <td>Update</td>
+            <td><button  id="updateAnn">Update
+		Ann</button></td>
             <td>Add Receipt</td>
           <td>
           <table>
@@ -70,5 +71,11 @@
 <script type="text/javascript">
 $(document).ready( function () {
     $('#myTable').DataTable();
+    $("#updateAnn").click(function(){
+    	var a = $(this).parents("tr").find(".name").text();
+    	alert(a);
+    	//$('#addAnnModal').modal('show');
+    	  
+    	});
 } );
 </script>

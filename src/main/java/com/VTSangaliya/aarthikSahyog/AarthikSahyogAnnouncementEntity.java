@@ -36,6 +36,8 @@ public class AarthikSahyogAnnouncementEntity {
 	private int announceAmount;
 	private LocalDate addedOn;
 	private char isActive;
+	private byte[] photo;
+	
 	//@JsonIgnore
 	@OneToMany(mappedBy = "aarthikSahyogAnnouncementEntity",cascade = CascadeType.ALL)
 	//@JsonIgnore
@@ -121,5 +123,12 @@ public class AarthikSahyogAnnouncementEntity {
 	public void setAddedOn(LocalDate addedOn) {
 		this.addedOn = addedOn;
 	}
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	
 	
 }
