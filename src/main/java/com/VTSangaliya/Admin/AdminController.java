@@ -2,6 +2,7 @@ package com.VTSangaliya.Admin;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.List;
 
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementEntity;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementRepo;
+import com.VTSangaliya.aarthikSahyog.AarthikSahyogEntity;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
 import com.VTSangaliya.citizen.SessionServices;
 import com.VTSangaliya.expenditure.ExpenditureCatEntity;
@@ -226,6 +229,90 @@ public class AdminController {
 		}
 
 	}
+	
+	@RequestMapping("/AdminSaveAndUpdateArthikSahyogReceipt")
+	public ModelAndView AdminSaveAndUpdateArthikSahyogReceipt( AarthikSahyogEntity arthikSahyogEntity,
+			@RequestParam("Date") String date,RedirectAttributes rd) {
+		// System.out.println("saved aarthik");
+		String status;
+
+		AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity = arthikSahyogAnnouncementRepo
+				.findById(arthikSahyogEntity.getAnnounceId()).get();
+		AarthikSahyogEntity saved = new AarthikSahyogEntity();
+		
+		// for receipt update
+		if (arthikSahyogEntity.getId() > 0) {
+			// ExpenditureEntity findById =
+			// expenditureRepo.findById(expenditureEntity.getExpdId()).get();
+			List<AarthikSahyogEntity> findByReceiptNo = aarthikSahyogRepo
+					.findAllByReceiptNoAndIdNot(arthikSahyogEntity.getReceiptNo(), arthikSahyogEntity.getId());
+			if (findByReceiptNo.size() > 0) {
+				status = "exist";
+			} else {
+				// System.out.println("in else block");
+				AarthikSahyogEntity arthikSahyo = aarthikSahyogRepo.findById(arthikSahyogEntity.getId()).get();
+				arthikSahyogEntity.setAddedOn(arthikSahyo.getAddedOn());
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+				 
+
+				  //convert String to LocalDate
+				  
+				arthikSahyogEntity.setReceiptDate(LocalDate.parse(date));
+				arthikSahyogEntity.setAarthikSahyogAnnouncementEntity(arthikSahyo.getAarthikSahyogAnnouncementEntity());
+				saved = aarthikSahyogRepo.save(arthikSahyogEntity);
+
+				status = "success";
+			}
+
+		}
+
+		// for add new receipt
+		else {
+			List<AarthikSahyogEntity> getData = aarthikSahyogRepo.findByReceiptNo(arthikSahyogEntity.getReceiptNo());
+			if (getData.size() == 0) {
+				arthikSahyogEntity.setAddedOn(LocalDate.now());
+				arthikSahyogEntity.setReceiptDate(LocalDate.parse(date));
+				arthikSahyogEntity.setAarthikSahyogAnnouncementEntity(arthikSahyogAnnouncementEntity);
+				saved = aarthikSahyogRepo.save(arthikSahyogEntity);
+				// send msg to sahyogkrta
+				String name = null;
+				String sahyogkrta = null;
+				// System.out.println("smsName Not found2"+arthikSahyogEntity.getSmsName());
+				if (arthikSahyogEntity.getSmsName() == null) {
+					name = saved.getAarthikSahyogAnnouncementEntity().getName();
+
+					// name = saved.getName();
+					if (name.contains(" ")) {
+						sahyogkrta = name.substring(0, name.indexOf(" ")) + " जी";
+					} else {
+						sahyogkrta = name + " जी ";
+					}
+				} else {
+					sahyogkrta = arthikSahyogEntity.getSmsName()+" Ji";
+				}
+				System.out.println("message send to length" + sahyogkrta.length());
+				System.out.println("message send to" + sahyogkrta);
+				/*
+				 * messageService.sendMessageToAarthikSahyog(sahyogkrta,
+				 * saved.getAarthikSahyogAnnouncementEntity().getMobile(), saved.getAmount(),
+				 * saved.getReceiptNo(), saved.getReceiptDate());
+				 */
+				status = "success";
+			} else {
+				status = "exist";
+			}
+		}
+		if (saved == null) {
+			status = "fail";
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminShowAarthikSahyog");
+		//mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
+		
+		rd.addAttribute("status",status);
+		return mv;
+	}
+
 	
 	@RequestMapping("/logout")
 	public ModelAndView adminLogout(HttpServletRequest request, HttpSession session,Model model)

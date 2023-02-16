@@ -44,7 +44,8 @@
             <button id="updateBtn" type="button" onclick="updateAnn('${allAnnouncement.annId }','${allAnnouncement.name }',
             '${allAnnouncement.address }','${allAnnouncement.mobile }','${allAnnouncement.announceAmount }')">Update</button>
       </td>
-            <td>Add Receipt</td>
+            <td><button onclick="addReceipt('${allAnnouncement.annId }','${allAnnouncement.name }')">Add
+		Receipt</button></td>
           <td>
           <table>
           <c:forEach items="${allAnnouncement.aarthikSahyogEntity}" var="allReceipt"

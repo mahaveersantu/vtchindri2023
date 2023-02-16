@@ -36,6 +36,7 @@
 
 
 		<%@include file="../components/adminAddAnnouncement.jsp"%> 
+		<%@include file="../components/adminAddReceipt.jsp"%> 
 		 <%@include file="../components/aarthik-sahyog-detail.jsp"%>  
 		<%-- <div class="mt-1"></div>
 		<%@include file="../components/aarthik-sahyog.jsp"%>  --%>
