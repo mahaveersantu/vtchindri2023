@@ -2,6 +2,7 @@ package com.VTSangaliya.Admin;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -133,8 +134,9 @@ public class AdminController {
 				AarthikSahyogAnnouncementEntity aarthikSahyog = arthikSahyogAnnouncementRepo
 						.findById(arthikSahyogAnnouncementEntity.getAnnId()).get();
 				arthikSahyogAnnouncementEntity.setAddedOn(aarthikSahyog.getAddedOn());
-				System.out.println("photo size ");
-				System.out.println("photo size "+sahyogkrta_photo);
+				arthikSahyogAnnouncementEntity.setIsActive('Y');
+				//System.out.println("photo size ");
+				//System.out.println("photo size "+sahyogkrta_photo.getName());
 				if(sahyogkrta_photo!=null)
 				{
 					if (sahyogkrta_photo.getContentType().contains("jpg") || sahyogkrta_photo.getContentType().contains("jpeg"))
@@ -156,8 +158,9 @@ public class AdminController {
 					.findByMobile(arthikSahyogAnnouncementEntity.getMobile());
 			if (getData.size() == 0) {
 				arthikSahyogAnnouncementEntity.setAddedOn(LocalDate.now());
+				arthikSahyogAnnouncementEntity.setIsActive('Y');
 
-				System.out.println("size of photo is "+sahyogkrta_photo.getSize());
+				//System.out.println("size of photo is "+sahyogkrta_photo.getSize());
 				
 				  if(sahyogkrta_photo!=null) {
 					  if (sahyogkrta_photo.getContentType().contains("jpg") || sahyogkrta_photo.getContentType().contains("jpeg"))
@@ -196,9 +199,9 @@ public class AdminController {
 		{
 			sessionServices.setAdminAarthikSahyogAnnouncementSession();
 		}
-		System.out.println("Date Saved");
+		//System.out.println("Date Saved");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("admin/admin-pages/adminAarthikSahyog");
+		mv.setViewName("redirect:/adminShowAarthikSahyog");
 		mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
 		mv.addObject("status",status);
 		return mv;

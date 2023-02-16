@@ -37,7 +37,8 @@ public class AarthikSahyogAnnouncementEntity {
 	private LocalDate addedOn;
 	private char isActive;
 	private byte[] photo;
-	
+	@Transient
+	private String encodedString;
 	//@JsonIgnore
 	@OneToMany(mappedBy = "aarthikSahyogAnnouncementEntity",cascade = CascadeType.ALL)
 	//@JsonIgnore
@@ -129,6 +130,13 @@ public class AarthikSahyogAnnouncementEntity {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+	public String getEncodedString() {
+		return encodedString;
+	}
+	public void setEncodedString(String encodedString) {
+		this.encodedString = encodedString;
+	}
+	
 	
 	
 }

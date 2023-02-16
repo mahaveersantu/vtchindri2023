@@ -3,6 +3,7 @@ package com.VTSangaliya.citizen;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -72,9 +73,17 @@ public class CitizenController {
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("citizen/pages/home");
+		//String encodedString = Base64.getEncoder().encodeToString(originalInput.getBytes());
 		
-		
-		mv.addObject("topTen",session.getAttribute("topTen") );
+		List<AarthikSahyogAnnouncementEntity> topTen=(List<AarthikSahyogAnnouncementEntity>) session.getAttribute("topTen");
+		topTen.forEach(e->{
+			if(e.getPhoto()!=null)
+			{
+			e.setEncodedString(Base64.getEncoder().encodeToString(e.getPhoto()));
+			
+			}
+		});
+		mv.addObject("topTen",topTen );
 		mv.addObject("totalReceived",session.getAttribute("totalReceived") );
 		mv.addObject("totalLastMonthReceived",session.getAttribute("totalLastMonthReceived") );
 		mv.addObject("totalExpndLastMonth", session.getAttribute("totalExpndLastMonth"));

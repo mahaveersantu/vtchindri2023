@@ -159,6 +159,7 @@ public class SessionServices {
 		for (i = 0; i < 8; i++) {
 			AarthikSahyogAnnouncementEntity obj = new AarthikSahyogAnnouncementEntity();
 			obj = findAll.get(i);
+			//String encodedString = Base64.getEncoder().encodeToString(originalInput.getBytes());
 			topTen.add(obj);
 
 		}

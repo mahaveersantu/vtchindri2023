@@ -18,9 +18,14 @@
 <c:forEach items="${topTen}" var="TopTenBhamashah" varStatus="loop">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="member-img">
-                <!-- <img src="assets/img/team/dummy.png" class="img-fluid" alt=""> -->
-                <img src="data:image/img;base64,${TopTenBhamashah.photo} " class="img-fluid" alt="">
+              <div class="member-img" style="height: 300px; width: 300px">
+              <c:if test="${TopTenBhamashah.encodedString==null}">
+                <img src="assets/img/team/dummy.png" class="img-fluid" alt="" width="300" height="300">
+                </c:if>
+                 <c:if test="${TopTenBhamashah.encodedString!=null}">
+                <img src="data:image/img;base64,${TopTenBhamashah.encodedString}" 
+                class="img-fluid" alt="Not Available" width="300" height="300">
+                 </c:if>
                 <div class="social">
                   <h4>${TopTenBhamashah.address}</h4>
                 </div>
