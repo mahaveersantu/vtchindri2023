@@ -27,6 +27,8 @@ import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
 import com.VTSangaliya.citizen.SessionServices;
 import com.VTSangaliya.expenditure.ExpenditureCatEntity;
 import com.VTSangaliya.expenditure.ExpenditureCatRepo;
+import com.VTSangaliya.gairAarthikSahyog.GairAarthikRepo;
+import com.VTSangaliya.gairAarthikSahyog.GairAarthikSahyogEntity;
 import com.VTSangaliya.messages.MessageService;
 import com.VTSangaliya.user.UserEntity;
 import com.VTSangaliya.user.UserRepo;
@@ -44,6 +46,8 @@ public class AdminController {
 	private MessageService messageService;
 	@Autowired
 	private ExpenditureCatRepo expenditureCatRepo;
+	@Autowired
+	private GairAarthikRepo gairAarthikRepo;
 	int total = 0;
 	@Autowired
 	private AdminSessionServices sessionServices;
@@ -313,6 +317,53 @@ public class AdminController {
 		return mv;
 	}
 
+	
+	
+	@RequestMapping("/adminShowGairAarthikSahyog")
+	public ModelAndView adminShowGairAarthikSahyog(HttpSession session)
+	{
+		if(session.getAttribute("allGairAarthik")==null)
+		{
+			sessionServices.setAdminallGairAarthikSession();
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/admin-pages/adminGairAarthikSahyog");
+		mv.addObject("allGairAarthik",session.getAttribute("allGairAarthik"));
+		return mv;
+		
+	}
+	
+	@PostMapping("/adminSaveAndUpdateGairAarthikSahyog")
+	public ModelAndView adminSaveAndUpdateGairAarthikSahyog(GairAarthikSahyogEntity gairAarthikSahyogEntity,RedirectAttributes rd) {
+		GairAarthikSahyogEntity saved = gairAarthikRepo.save(gairAarthikSahyogEntity);
+		String status;
+		if (saved != null) {
+			status = "success";
+		} else {
+			status = "fail";
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminShowGairAarthikSahyog");
+		//mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
+		
+		rd.addAttribute("status",status);
+		return mv;
+	}
+	
+	
+	@RequestMapping("/adminRefreshGairAarthik")
+	public ModelAndView adminRefreshGairAarthik(HttpSession session)
+	{
+		
+			sessionServices.setAdminallGairAarthikSession();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminShowGairAarthikSahyog");
+		mv.addObject("allGairAarthik",session.getAttribute("allGairAarthik"));
+		return mv;
+		
+	}
 	
 	@RequestMapping("/logout")
 	public ModelAndView adminLogout(HttpServletRequest request, HttpSession session,Model model)

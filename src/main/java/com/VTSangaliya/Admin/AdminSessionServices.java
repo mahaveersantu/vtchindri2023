@@ -18,6 +18,7 @@ import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
 import com.VTSangaliya.expenditure.ExpenditureCatRepo;
 import com.VTSangaliya.expenditure.ExpenditureRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikRepo;
+import com.VTSangaliya.gairAarthikSahyog.GairAarthikSahyogEntity;
 import com.VTSangaliya.messages.MessageService;
 import com.VTSangaliya.samitiMember.SamitiMemberRepo;
 import com.VTSangaliya.user.TotalVisitorRepo;
@@ -41,6 +42,7 @@ public class AdminSessionServices {
 	private TotalVisitorRepo totalVisitorRepo;
 	@Autowired
 	private GairAarthikRepo gairAarthikRepo;
+	
 	Double totalLastMonthReceived = 0.0;
 	int pendingAmount = 0;
 	Double totalReceived = 0.0;
@@ -100,5 +102,13 @@ if(aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity()!=null)
 		 HttpSession session =  request.getSession();
 			session.setAttribute("allReceipt",findAllSort);
 			
+	}
+
+	public void setAdminallGairAarthikSession() {
+		List<GairAarthikSahyogEntity> findAll = gairAarthikRepo.findAll();
+		
+		HttpSession session =  request.getSession();
+		session.setAttribute("allGairAarthik",findAll);
+		
 	}
 }

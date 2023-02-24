@@ -47,7 +47,7 @@
               </li>
               <li><a href="#">Drop Down 2</a></li>
               <li><a href="#">Drop Down 3</a></li> -->
-              <li><a href="${pageContext.request.contextPath}/showGairAarthikSahyog">गैर आर्थिक</a></li>
+              <li><a href="${pageContext.request.contextPath}/adminShowGairAarthikSahyog">गैर आर्थिक</a></li>
             </ul>
           </li>
           
