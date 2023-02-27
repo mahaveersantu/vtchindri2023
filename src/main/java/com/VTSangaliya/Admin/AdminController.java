@@ -27,6 +27,8 @@ import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
 import com.VTSangaliya.citizen.SessionServices;
 import com.VTSangaliya.expenditure.ExpenditureCatEntity;
 import com.VTSangaliya.expenditure.ExpenditureCatRepo;
+import com.VTSangaliya.expenditure.ExpenditureEntity;
+import com.VTSangaliya.expenditure.ExpenditureRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikSahyogEntity;
 import com.VTSangaliya.messages.MessageService;
@@ -48,6 +50,8 @@ public class AdminController {
 	private ExpenditureCatRepo expenditureCatRepo;
 	@Autowired
 	private GairAarthikRepo gairAarthikRepo;
+	@Autowired
+	private ExpenditureRepo expenditureRepo;
 	int total = 0;
 	@Autowired
 	private AdminSessionServices sessionServices;
@@ -224,13 +228,20 @@ public class AdminController {
 		
 	}
 	@RequestMapping("/adminSaveAndUpdateCategory")
-	public String saveAndUpdateCategory(ExpenditureCatEntity expenditureCatEntity) {
+	public ModelAndView saveAndUpdateCategory(ExpenditureCatEntity expenditureCatEntity,RedirectAttributes rd) {
 		ExpenditureCatEntity saved = expenditureCatRepo.save(expenditureCatEntity);
+		String status;
 		if (saved != null) {
-			return "success";
+			status= "success";
 		} else {
-			return "fail";
+			status= "fail";
 		}
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminShowAllCat");
+		//mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
+		
+		rd.addAttribute("status",status);
+		return mv;
 
 	}
 	
@@ -294,8 +305,8 @@ public class AdminController {
 				} else {
 					sahyogkrta = arthikSahyogEntity.getSmsName()+" Ji";
 				}
-				System.out.println("message send to length" + sahyogkrta.length());
-				System.out.println("message send to" + sahyogkrta);
+				//System.out.println("message send to length" + sahyogkrta.length());
+				//System.out.println("message send to" + sahyogkrta);
 				/*
 				 * messageService.sendMessageToAarthikSahyog(sahyogkrta,
 				 * saved.getAarthikSahyogAnnouncementEntity().getMobile(), saved.getAmount(),
@@ -362,6 +373,22 @@ public class AdminController {
 		mv.setViewName("redirect:/adminShowGairAarthikSahyog");
 		mv.addObject("allGairAarthik",session.getAttribute("allGairAarthik"));
 		return mv;
+		
+	}
+	
+	@RequestMapping("/adminAllExpenditures")
+	public ModelAndView getAllExpenditures(HttpSession session) {
+		if(session.getAttribute("allExpenditure")==null)
+		{
+			sessionServices.setAdminallExpenditure();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/admin-pages/adminExpenditure");
+		//System.out.println("get expd session = "+ session.getAttribute("allExpenditure").size());
+		mv.addObject("allExpenditure",session.getAttribute("allExpenditure"));
+		return mv;
+		
 		
 	}
 	

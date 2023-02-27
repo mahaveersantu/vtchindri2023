@@ -26,6 +26,7 @@
 									<form action="${pageContext.request.contextPath}/adminSaveAndUpdateCategory"  method="post" enctype="multipart/form-data">
 
 										<div class="col-md-12">
+										<input class="form-control" type="hidden" name="catId" id="idE">
 											<input class="form-control" type="text" name="catName"
 												placeholder="Category Name" required id="catNameE">
 
@@ -50,9 +51,13 @@
 	</div>
 </div>
 
+
+	
 <div class="text-center">
-	<button data-bs-toggle="modal" data-bs-target="#addAnnModal">Add
+	<button onclick="addCategory()">Add
 		Category</button>
+
+
 
 
 </div>
@@ -64,4 +69,10 @@
 			keyboard : false
 		})
 	});
+	function addCategory() {
+		$("#idE").val();
+		$("#catNameE").val("");
+		$("#modaltitle").html("Add Category");
+		$('#addCatModal').modal('show');
+	}
 </script>

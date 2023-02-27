@@ -33,7 +33,7 @@
             <td>${loop.index+1}</td>
             <td class="name">${allCategories.catName }</td>
             
-            <td><button  id="updateCat" onclick="updateCat('${allCategories.catName }')">Update
+            <td><button  id="updateCat" onclick="updateCat('${allCategories.catId }','${allCategories.catName }')">Update
 		Category</button></td>
             
          
@@ -49,10 +49,13 @@ $(document).ready( function () {
     $('#myTable').DataTable();
    
 } );
-function updateCat(catName){
+function updateCat(id,catName){
 	
 	 /* $("#catNameE").val(catName); */
+	$("#catNameE").val(catName);
+	$("#idE").val(id);
+		$("#modaltitle").html("Update Category");
+		$('#addCatModal').modal('show');
 	
-	$('#addCatModal').modal('show');
 }
 </script>

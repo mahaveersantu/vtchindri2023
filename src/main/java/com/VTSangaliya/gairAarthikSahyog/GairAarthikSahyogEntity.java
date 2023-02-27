@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 public class GairAarthikSahyogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Transient
 	private int srNo;
 	private String name;
@@ -21,10 +21,11 @@ public class GairAarthikSahyogEntity {
 	private String sahyogDetail;
 	private int approxCost;
 	private char isActive;
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public int getSrNo() {

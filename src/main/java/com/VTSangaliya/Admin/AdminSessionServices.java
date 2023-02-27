@@ -16,6 +16,7 @@ import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementRepo;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogEntity;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
 import com.VTSangaliya.expenditure.ExpenditureCatRepo;
+import com.VTSangaliya.expenditure.ExpenditureEntity;
 import com.VTSangaliya.expenditure.ExpenditureRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikSahyogEntity;
@@ -109,6 +110,13 @@ if(aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity()!=null)
 		
 		HttpSession session =  request.getSession();
 		session.setAttribute("allGairAarthik",findAll);
+		
+	}
+	public void setAdminallExpenditure() {
+		List<ExpenditureEntity> findAll = expenditureRepo.findAllByOrderByExpdReceiptNo();
+		
+		HttpSession session =  request.getSession();
+		session.setAttribute("allExpenditure",findAll);
 		
 	}
 }

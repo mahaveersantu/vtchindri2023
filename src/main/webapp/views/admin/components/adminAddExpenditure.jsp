@@ -74,7 +74,7 @@
 </div>
 
 <div class="text-center">
-	<button onclick="addGairAarthik()">Add Gair Aarthik Details</button>
+	<button onclick="addGairAarthik()">Add Expenditure Details</button>
 
 
 </div>
