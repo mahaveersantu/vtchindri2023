@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -452,6 +453,23 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/adminShowAarthikSahyog");
 		rd.addAttribute("status","success");
+		return mv;
+	}
+	
+	@GetMapping("/adminShowSamitiMember")
+	public ModelAndView adminShowSamitiMember(HttpSession session) {
+
+		if(session.getAttribute("samitiMember")==null)
+		{
+			sessionServices.setsamitiMemberSession();
+		}
+
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/admin-pages/admin-samiti-member-page");
+
+		mv.addObject("samitiMember",session.getAttribute("samitiMember") );
+
 		return mv;
 	}
 	@RequestMapping("/logout")

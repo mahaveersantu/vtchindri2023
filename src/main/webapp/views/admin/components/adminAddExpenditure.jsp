@@ -25,7 +25,7 @@
 									<p>Fill in the data below.</p>
 									<form
 										action="${pageContext.request.contextPath}/adminSaveAndUpdateExpenditure"
-										method="POST" enctype="multipart/form-data">
+										method="POST" enctype="multipart/form-data" name="editExpenditure">
 
 										<div class="col-md-12">
 
@@ -42,11 +42,18 @@
 												required id="nameE" style="font-weight: bold;">
 
 										</div>
+										<div class="col-md-12">
+											<!-- <input class="form-control" type="hidden" name="id" id="idE"> -->
+											<input class="form-control mt-3" type="text"
+												name="expdDetail" placeholder="Expenditure Details"
+												required id="expdDetailE" style="font-weight: bold;">
+
+										</div>
 
 										<div class="col-md-12">
 											<input class="form-control mt-3" type="number"
 												name="expdAmount" placeholder="expditure Amount" required
-												id="addressE">
+												id="amountE">
 
 										</div>
 										<div class="col-md-12">
@@ -61,7 +68,7 @@
 											<label for="cars">Choose a Category:</label> <select
 												class="form-select" name="catId">
 												<c:forEach items="${allCategories}" var="allCat">
-													<option value="${allCat.catId }" style="font-weight: bold;">${allCat.catName }</option>
+													<option value="${allCat.catId }" style="font-weight: bold;" id="catIdE">${allCat.catName }</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -111,7 +118,5 @@
 		$('#addExpdModal').modal('show');
 	}
 
-	function editExpenditure(id, name, receipt, amount, date) {
-
-	}
+	
 </script>

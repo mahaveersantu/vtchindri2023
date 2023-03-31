@@ -61,7 +61,7 @@
           
            <li class="dropdown"><a href="#"><span>ट्रस्ट</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-          <li><a class="nav-link scrollto " href="${pageContext.request.contextPath}/showSamitiMember">ट्रस्ट सदस्य</a></li>
+          <li><a class="nav-link scrollto " href="${pageContext.request.contextPath}/adminShowSamitiMember">ट्रस्ट सदस्य</a></li>
           <li><a class="nav-link scrollto " href="${pageContext.request.contextPath}/showUdeshy">ट्रस्ट उदेश्य</a></li>
         </ul>
         </li>

@@ -20,6 +20,7 @@ import com.VTSangaliya.expenditure.ExpenditureRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikRepo;
 import com.VTSangaliya.gairAarthikSahyog.GairAarthikSahyogEntity;
 import com.VTSangaliya.messages.MessageService;
+import com.VTSangaliya.samitiMember.SamitiMemberEntity;
 import com.VTSangaliya.samitiMember.SamitiMemberRepo;
 import com.VTSangaliya.user.TotalVisitorRepo;
 import com.VTSangaliya.user.UserRepo;
@@ -116,6 +117,14 @@ if(aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity()!=null)
 
 		HttpSession session =  request.getSession();
 		session.setAttribute("allExpenditure",findAll);
+
+	}
+	public void setsamitiMemberSession()
+	{
+
+			 List<SamitiMemberEntity> findAllByOrderByMemberPriority = samitiMemberRepo.findAllByOrderByMemberPriority();
+			 HttpSession session =  request.getSession();
+				session.setAttribute("samitiMember",findAllByOrderByMemberPriority);
 
 	}
 }

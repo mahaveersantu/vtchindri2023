@@ -15,6 +15,7 @@
             <th>क्रम संख्या</th>
             <th>प्राप्तकर्ता का नाम </th>
             <th>बाउचर न </th>
+            <th>Details </th>
             <th>Amount  </th>
             <th>दिनांक </th>
             <th>Category </th>
@@ -31,6 +32,7 @@
             <td>${loop.index+1}</td>
             <td class="name">${allExpenditure.receiverName }</td>
             <td>${allExpenditure.expdReceiptNo }</td>
+            <td>${allExpenditure.expdDetail }</td>
             <td>${allExpenditure.expdAmount }</td>
             <td>${allExpenditure.expdDate }</td>
             <td>${allExpenditure.expenditureCatEntity.catName }</td>
@@ -38,9 +40,14 @@
             '${allGairAarthik.address }','${allGairAarthik.mobile }','${allGairAarthik.sahyogDetail}')">Edit</button></td> --%>
        <td>
        
-     <button class="btn btn-secondary" onclick="editExpenditure('${allExpenditure.expdId }','${allExpenditure.receiverName }',
-            '${allExpenditure.expdReceiptNo }','${allExpenditure.expdAmount }','${allExpenditure.expdDate}')">Edit</button>
+     <button class="btn btn-secondary" onclick="editEx('${allExpenditure.expdId }',
+     '${allExpenditure.receiverName }',
+            '${allExpenditure.expdReceiptNo }',
+            '${allExpenditure.expdDetail }','${allExpenditure.expdAmount }',
+            '${allExpenditure.expdDate}',
+            '${allExpenditure.expenditureCatEntity.catId}')"> Edit </button> 
        
+      
        </td>
         </tr>
         </c:forEach>
@@ -52,9 +59,24 @@
 <script type="text/javascript">
 $(document).ready( function () {
     $('#myTable').DataTable();
-    
-
 } );
+
+function editEx(id, name, receipt,detail, amount, date,catId) {
+	$("#nameE").val(name);
+	var x = document.createElement("INPUT");
+	x.setAttribute("type", "hidden");
+	x.setAttribute("value", id);
+	x.setAttribute("name", "expdId");
+	editExpenditure.appendChild(x);
+	$("#expdDetailE").val(detail);
+	$("#amountE").val(amount);
+	$("#expdDateE").val(date);
+	$("#receiptE").val(receipt);
+	$("#catIdE").val(catId);
+	$("#modaltitle").html("Update Expenditure");
+
+	$('#addExpdModal').modal('show');
+}
 
 
 </script>
