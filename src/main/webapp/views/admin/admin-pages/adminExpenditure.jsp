@@ -24,7 +24,7 @@
 		<section id="featured-services" class="featured-services">
 <div class="d-flex justify-content-center"><h3 style="color: blue;" >-:खर्चा विवरण:-</h3></div>
 <div class="d-flex justify-content-center">
-<a href="${pageContext.request.contextPath}/adminRefreshGairAarthik" class="btn btn-secondary">Refresh</a>
+<a href="${pageContext.request.contextPath}/adminRefreshExpenditure" class="btn btn-secondary">Refresh</a>
 </div>
 
 

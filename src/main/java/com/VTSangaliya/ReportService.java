@@ -36,22 +36,22 @@
 //	private HttpServletRequest request;
 //	@Autowired
 //	private HttpServletResponse response;
-//	
+//
 //	public void createExpenditureExcelReport(final List<ExpenditureEntity> expenditureList) throws JRException {
 //        // Fetching the .jrxml file from the resources folder.
 //       // final InputStream stream = this.getClass().getResourceAsStream("classpath:expenditureDetail.jrxml");
 //        InputStream stream = request.getSession().getServletContext().getResourceAsStream("/jasper/expenditureDetail.jrxml");
 //        // Compile the Jasper report from .jrxml to .japser
 //        final JasperReport report = JasperCompileManager.compileReport(stream);
-// 
+//
 //        // Fetching the employees from the data source.
 //        final JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(expenditureList);
-// 
+//
 //        // Adding the additional parameters to the pdf.
 //        final Map<String, Object> parameters = new HashMap<>();
 //        parameters.put("createdBy", "javacodegeek.com");
 //        parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
-// 
+//
 //        // Filling the report with the employee data and additional parameters information.
 //        final JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
 //        JRXlsxExporter exporter = new JRXlsxExporter();
@@ -65,8 +65,8 @@
 //        reportConfigXLS.setRemoveEmptySpaceBetweenRows(true);
 //        reportConfigXLS.setRemoveEmptySpaceBetweenColumns(true);
 //       // reportConfigXLS.setAutoFitPageHeight(true);
-//      
-//        
+//
+//
 //        exporter.setExporterInput(new SimpleExporterInput(print));
 //        try {
 //			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(response.getOutputStream()));
@@ -81,22 +81,22 @@
 //
 //    }
 //
-//	
+//
 //	public void createAnnouncementExcelReport(final List<AarthikSahyogAnnouncementEntity> announcementList) throws JRException {
 //        // Fetching the .jrxml file from the resources folder.
 //       // final InputStream stream = this.getClass().getResourceAsStream("classpath:expenditureDetail.jrxml");
 //        InputStream stream = request.getSession().getServletContext().getResourceAsStream("/jasper/announcementDetail.jrxml");
 //        // Compile the Jasper report from .jrxml to .japser
 //        final JasperReport report = JasperCompileManager.compileReport(stream);
-// 
+//
 //        // Fetching the employees from the data source.
 //        final JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(announcementList);
-// 
+//
 //        // Adding the additional parameters to the pdf.
 //        final Map<String, Object> parameters = new HashMap<>();
 //        parameters.put("createdBy", "javacodegeek.com");
 //        parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
-// 
+//
 //        // Filling the report with the employee data and additional parameters information.
 //        final JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
 //        JRXlsxExporter exporter = new JRXlsxExporter();
@@ -110,8 +110,8 @@
 //        reportConfigXLS.setRemoveEmptySpaceBetweenRows(true);
 //        reportConfigXLS.setRemoveEmptySpaceBetweenColumns(true);
 //       // reportConfigXLS.setAutoFitPageHeight(true);
-//      
-//        
+//
+//
 //        exporter.setExporterInput(new SimpleExporterInput(print));
 //        try {
 //			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(response.getOutputStream()));

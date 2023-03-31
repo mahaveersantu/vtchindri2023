@@ -3,15 +3,19 @@ package com.VTSangaliya.Admin;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +28,6 @@ import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementEntity;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogAnnouncementRepo;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogEntity;
 import com.VTSangaliya.aarthikSahyog.AarthikSahyogRepo;
-import com.VTSangaliya.citizen.SessionServices;
 import com.VTSangaliya.expenditure.ExpenditureCatEntity;
 import com.VTSangaliya.expenditure.ExpenditureCatRepo;
 import com.VTSangaliya.expenditure.ExpenditureEntity;
@@ -60,10 +63,10 @@ public class AdminController {
 	{
 		//return "citizen/home";
 		//System.out.println("total announcement"+session.getAttribute("totalAnnounce"));
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/admin-pages/login");
-	
+
 		return mv;
 	}
 	@RequestMapping("/adminHome")
@@ -71,13 +74,13 @@ public class AdminController {
 	{
 		//return "citizen/home";
 		//System.out.println("total announcement"+session.getAttribute("totalAnnounce"));
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/admin-pages/admin-home");
-	
+
 		return mv;
 	}
-	
+
 	@PostMapping("/adminAuthentication")
 	public ModelAndView userAuthentication(UserEntity userEntity,HttpSession session)
 	{
@@ -87,10 +90,10 @@ public class AdminController {
 		if(user!=null)
 		{
 			session.setAttribute("adminSession", user);
-			
+
 			mv.setViewName("admin/admin-pages/admin-home");
 		}
-		
+
 		else
 		{
 			mv.setViewName("admin/admin-pages/login");
@@ -98,7 +101,7 @@ public class AdminController {
 	}
 		return mv;
 	}
-	
+
 	@RequestMapping("/adminShowAarthikSahyog")
 	public ModelAndView adminShowAarthikSahyog(HttpSession session)
 	{
@@ -110,9 +113,9 @@ public class AdminController {
 		mv.setViewName("admin/admin-pages/adminAarthikSahyog");
 		mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping("/adminAllReceipt")
 	public ModelAndView adminAllReceipt(HttpSession session)
 	{
@@ -124,13 +127,15 @@ public class AdminController {
 		mv.setViewName("admin/admin-pages/adminAllReceipt");
 		mv.addObject("allReceipt",session.getAttribute("allReceipt"));
 		return mv;
-		
+
 	}
-	
+
 	@PostMapping("/saveAndUpdateArthikSahyog")
-	public ModelAndView saveAndUpdateArthikSahyog(@RequestParam(required = false, value="sahyogkrta_photo") MultipartFile sahyogkrta_photo,AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity,
+	public ModelAndView saveAndUpdateArthikSahyog(@RequestParam(required = false, value="sahyogkrta_photo") MultipartFile sahyogkrta_photo,
+			AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity,
 			 HttpSession session) throws IOException {
 		String status;
+		System.out.println("saveAndUpdate");
 		AarthikSahyogAnnouncementEntity saved = new AarthikSahyogAnnouncementEntity();
 		if (arthikSahyogAnnouncementEntity.getAnnId() > 0) {
 			// ExpenditureEntity findById =
@@ -155,11 +160,11 @@ public class AdminController {
 					arthikSahyogAnnouncementEntity.setPhoto(sahyogkrta_photo.getBytes());
 					  }
 					else {
-						  status="invalid_photo";  
+						  status="invalid_photo";
 					  }
 				}
-				
-				
+
+
 				saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity);
 				status = "success";
 			}
@@ -172,17 +177,17 @@ public class AdminController {
 				arthikSahyogAnnouncementEntity.setIsActive('Y');
 
 				//System.out.println("size of photo is "+sahyogkrta_photo.getSize());
-				
+
 				  if(sahyogkrta_photo!=null) {
 					  if (sahyogkrta_photo.getContentType().contains("jpg") || sahyogkrta_photo.getContentType().contains("jpeg"))
 					  {
 				  arthikSahyogAnnouncementEntity.setPhoto(sahyogkrta_photo.getBytes());
 				  }
 					  else {
-						  status="invalid_photo";  
+						  status="invalid_photo";
 					  }
 				  }
-				 
+
 				saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity);
 				// send sms to sahyogkrta
 				String name = null;
@@ -217,15 +222,15 @@ public class AdminController {
 		mv.addObject("status",status);
 		return mv;
 	}
-	
+
 	@RequestMapping("/adminShowAllCat")
 	public ModelAndView getAllCategory() {
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/admin-pages/adminExpenditureCategory");
 	    mv.addObject("allCategories", expenditureCatRepo.findAll());
 		return mv;
-		
+
 	}
 	@RequestMapping("/adminSaveAndUpdateCategory")
 	public ModelAndView saveAndUpdateCategory(ExpenditureCatEntity expenditureCatEntity,RedirectAttributes rd) {
@@ -239,12 +244,12 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/adminShowAllCat");
 		//mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
-		
+
 		rd.addAttribute("status",status);
 		return mv;
 
 	}
-	
+
 	@RequestMapping("/AdminSaveAndUpdateArthikSahyogReceipt")
 	public ModelAndView AdminSaveAndUpdateArthikSahyogReceipt( AarthikSahyogEntity arthikSahyogEntity,
 			@RequestParam("Date") String date,RedirectAttributes rd) {
@@ -254,7 +259,7 @@ public class AdminController {
 		AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity = arthikSahyogAnnouncementRepo
 				.findById(arthikSahyogEntity.getAnnounceId()).get();
 		AarthikSahyogEntity saved = new AarthikSahyogEntity();
-		
+
 		// for receipt update
 		if (arthikSahyogEntity.getId() > 0) {
 			// ExpenditureEntity findById =
@@ -267,11 +272,11 @@ public class AdminController {
 				// System.out.println("in else block");
 				AarthikSahyogEntity arthikSahyo = aarthikSahyogRepo.findById(arthikSahyogEntity.getId()).get();
 				arthikSahyogEntity.setAddedOn(arthikSahyo.getAddedOn());
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-				 
+				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
 
 				  //convert String to LocalDate
-				  
+
 				arthikSahyogEntity.setReceiptDate(LocalDate.parse(date));
 				arthikSahyogEntity.setAarthikSahyogAnnouncementEntity(arthikSahyo.getAarthikSahyogAnnouncementEntity());
 				saved = aarthikSahyogRepo.save(arthikSahyogEntity);
@@ -323,13 +328,24 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/adminShowAarthikSahyog");
 		//mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
-		
+
 		rd.addAttribute("status",status);
 		return mv;
 	}
+	
 
-	
-	
+	@RequestMapping("/adminRefresh")
+	public ModelAndView adminRefresh(HttpSession session)
+	{
+
+			sessionServices.setAdminAarthikSahyogAnnouncementSession();
+			sessionServices.setAdminAarthikSahyogAllReceiptSession();
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminShowAarthikSahyog");
+		return mv;
+
+	}
 	@RequestMapping("/adminShowGairAarthikSahyog")
 	public ModelAndView adminShowGairAarthikSahyog(HttpSession session)
 	{
@@ -341,9 +357,9 @@ public class AdminController {
 		mv.setViewName("admin/admin-pages/adminGairAarthikSahyog");
 		mv.addObject("allGairAarthik",session.getAttribute("allGairAarthik"));
 		return mv;
-		
+
 	}
-	
+
 	@PostMapping("/adminSaveAndUpdateGairAarthikSahyog")
 	public ModelAndView adminSaveAndUpdateGairAarthikSahyog(GairAarthikSahyogEntity gairAarthikSahyogEntity,RedirectAttributes rd) {
 		GairAarthikSahyogEntity saved = gairAarthikRepo.save(gairAarthikSahyogEntity);
@@ -353,49 +369,95 @@ public class AdminController {
 		} else {
 			status = "fail";
 		}
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/adminShowGairAarthikSahyog");
 		//mv.addObject("allAnnouncement",session.getAttribute("allAnnouncement"));
-		
+
 		rd.addAttribute("status",status);
 		return mv;
 	}
-	
-	
+
+
 	@RequestMapping("/adminRefreshGairAarthik")
 	public ModelAndView adminRefreshGairAarthik(HttpSession session)
 	{
-		
+
 			sessionServices.setAdminallGairAarthikSession();
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/adminShowGairAarthikSahyog");
 		mv.addObject("allGairAarthik",session.getAttribute("allGairAarthik"));
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping("/adminAllExpenditures")
 	public ModelAndView getAllExpenditures(HttpSession session) {
 		if(session.getAttribute("allExpenditure")==null)
 		{
 			sessionServices.setAdminallExpenditure();
 		}
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/admin-pages/adminExpenditure");
 		//System.out.println("get expd session = "+ session.getAttribute("allExpenditure").size());
 		mv.addObject("allExpenditure",session.getAttribute("allExpenditure"));
+		mv.addObject("allCategories", expenditureCatRepo.findAll());
+		
 		return mv;
-		
-		
 	}
 	
+	
+	@PostMapping("/adminSaveAndUpdateExpenditure")
+	public ModelAndView adminSaveAndUpdateExpenditure(ExpenditureEntity expenditureEntity,RedirectAttributes rd,
+			@RequestParam("catId") int catId,
+			@RequestParam("Date") String date) {
+		
+		ExpenditureCatEntity expenditureCatEntity= new ExpenditureCatEntity();
+		expenditureCatEntity.setCatId(catId);
+		expenditureEntity.setExpenditureCatEntity(expenditureCatEntity);
+		expenditureEntity.setExpdDate(LocalDate.parse(date));
+		ExpenditureEntity saved = expenditureRepo.save(expenditureEntity);
+		
+		String status;
+		if (saved != null) {
+			status = "success";
+		} else {
+			status = "fail";
+		}
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminAllExpenditures");
+     	rd.addAttribute("status",status);
+		return mv;
+	}
+	@RequestMapping("/adminRefreshExpenditure")
+	public ModelAndView adminRefreshExpenditure(HttpSession session)
+	{
+
+			sessionServices.setAdminallExpenditure();
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminAllExpenditures");
+		mv.addObject("allExpenditure",session.getAttribute("allExpenditure"));
+		mv.addObject("allCategories", expenditureCatRepo.findAll());
+		return mv;
+
+	}
+	
+	@RequestMapping("/AdminDeleteSahyogReceipt/{id}")
+	public ModelAndView AdminDeleteSahyogReceipt(@PathVariable int id, RedirectAttributes rd) {
+		aarthikSahyogRepo.deleteById(id);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/adminShowAarthikSahyog");
+		rd.addAttribute("status","success");
+		return mv;
+	}
 	@RequestMapping("/logout")
 	public ModelAndView adminLogout(HttpServletRequest request, HttpSession session,Model model)
 	{
-		
+
 		if(session.getAttribute("adminSession")!=null)
 		{
 			session.removeAttribute("adminSession");
@@ -403,9 +465,9 @@ public class AdminController {
 		request.getSession().invalidate();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/admin-pages/login");
-	
+
 		return mv;
-		
+
 	}
 	}
 

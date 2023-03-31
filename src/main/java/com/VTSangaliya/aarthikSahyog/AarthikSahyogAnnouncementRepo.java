@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.VTSangaliya.messages.MessageDTO;
-
 @Repository
 public interface AarthikSahyogAnnouncementRepo extends JpaRepository<AarthikSahyogAnnouncementEntity, Integer> {
 
@@ -14,7 +12,7 @@ public interface AarthikSahyogAnnouncementRepo extends JpaRepository<AarthikSahy
 
 	List<AarthikSahyogAnnouncementEntity> findByMobile(String mobile);
 
-	
+
 
 	List<AarthikSahyogAnnouncementEntity> findAllByMobileAndAnnIdNot(String mobile, int id);
 

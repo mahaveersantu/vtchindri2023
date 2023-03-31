@@ -3,8 +3,6 @@ package com.VTSangaliya.expenditure;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.VTSangaliya.aarthikSahyog.AarthikSahyogEntity;
 import com.VTSangaliya.messages.MessageService;
 import com.VTSangaliya.samitiMember.SamitiMemberEntity;
 import com.VTSangaliya.samitiMember.SamitiMemberRepo;
@@ -42,7 +37,7 @@ public class ExpenditureController {
 
 	@Autowired
 	private SamitiMemberRepo samitiMemberRepo;
-	
+
 	@Autowired
 	private MessageService messageService;
 	int year = 0;
@@ -52,7 +47,7 @@ public class ExpenditureController {
 		return expenditureCatRepo.findAll();
 	}
 
-	
+
 
 	@RequestMapping("/saveAndUpdateCategory")
 	public String saveAndUpdateCategory(@RequestBody ExpenditureCatEntity expenditureCatEntity) {
@@ -144,7 +139,7 @@ public class ExpenditureController {
 					//System.out.println("mobile no"+samitiMemberEntity.getMemberMobile());
 				}
 				//System.out.println("mobile list "+ mobileList);
-				
+
 				//System.out.println("mobile list is "+ mobileList);
 				if(mobileList.length()>0)
 				{
@@ -206,7 +201,7 @@ public class ExpenditureController {
 	@RequestMapping("/totalExpenditure")
 	public Double totalExpenditure() {
 		List<ExpenditureEntity> findAll = expenditureRepo.findByIsActiveOrderByExpdAmountDesc('Y');
-		Double total = 0.0;
+		double total = 0.0;
 		for (ExpenditureEntity expenditureEntity : findAll) {
 
 			total += expenditureEntity.getExpdAmount();
@@ -227,7 +222,7 @@ public class ExpenditureController {
 				.filter(p -> p.getExpdDate().getYear() == year
 						&& p.getExpdDate().getMonthValue() == (LocalDate.now().minusMonths(1).getMonthValue()))
 				.collect(Collectors.toList());
-		Double total = 0.0;
+		double total = 0.0;
 		for (ExpenditureEntity expenditureEntity : lastMonthExpd) {
 			// System.out.println(expenditureEntity.getExpdDate());
 			total += expenditureEntity.getExpdAmount();
@@ -242,7 +237,7 @@ public class ExpenditureController {
 		expenditureCatEntity.setCatId(json.get("catId"));
 		List<ExpenditureEntity> findAllByExpenditureCatEntity = expenditureRepo
 				.findAllByExpenditureCatEntity(expenditureCatEntity);
-		Double total = 0.0;
+		double total = 0.0;
 		for (ExpenditureEntity expenditureEntity : findAllByExpenditureCatEntity) {
 			// System.out.println(expenditureEntity.getExpdDate());
 			total += expenditureEntity.getExpdAmount();
@@ -250,8 +245,8 @@ public class ExpenditureController {
 		}
 		return total;
 	}
-	
-	
-	
+
+
+
 
 }

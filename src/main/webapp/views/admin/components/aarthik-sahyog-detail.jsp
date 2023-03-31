@@ -21,11 +21,7 @@
             <th>Update </th>
             <th>Add Receipt </th>
             <th>रशीद विवरण </th>
-            
-            
-           
-            
-        </tr>
+         </tr>
     </thead>
     <tbody>
     
@@ -41,11 +37,11 @@
             <td>${allAnnouncement.grandTotal }</td>
             <td>${allAnnouncement.pendingAmount }</td>
             <td>
-            <button id="updateBtn" type="button" onclick="updateAnn('${allAnnouncement.annId }','${allAnnouncement.name }',
+            <button class="btn btn-success" id="updateBtn" type="button" onclick="updateAnn('${allAnnouncement.annId }','${allAnnouncement.name }',
             '${allAnnouncement.address }','${allAnnouncement.mobile }','${allAnnouncement.announceAmount }')">Update</button>
       </td>
-            <td><button onclick="addReceipt('${allAnnouncement.annId }','${allAnnouncement.name }')">Add
-		Receipt</button></td>
+            <td><button class="btn btn-primary" onclick="addReceipt('${allAnnouncement.annId }','${allAnnouncement.name }')">Add
+		</button></td>
           <td>
           <table>
           <c:forEach items="${allAnnouncement.aarthikSahyogEntity}" var="allReceipt"
@@ -56,8 +52,18 @@
 					<td>${allReceipt.receiptNo }</td>
 					<td>${allReceipt.receiptDate }</td>
 					<td>${allReceipt.amount }</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<td>
+					<button id="updateBtn" type="button" class="btn btn-secondary"
+					onclick="updateReceipt('${allReceipt.aarthikSahyogAnnouncementEntity.annId}','${allReceipt.id }' ,'${allReceipt.receiptNo }',
+                                   '${allReceipt.receiptDate }','${allReceipt.amount }')">Edit</button>
+					
+					
+					</td>
+					<td>
+					<a class="btn btn-danger" href="${pageContext.request.contextPath}/AdminDeleteSahyogReceipt/${allReceipt.id}" 
+					onclick="return confirm('Are you sure to Delete Receipt No =  ${allReceipt.receiptNo } ?')">Delete</a>
+					
+					</td>
 					
 				
 					</tr>					
@@ -77,15 +83,6 @@ $(document).ready( function () {
     
 
 } );
-function updateAnn(annId,name,address,mobile,amount)
-{
-	$("#nameE").val(name);
-	$("#addressE").val(address);
-	$("#mobileE").val(mobile);
-	$("#annouceE").val(amount);
-	$("#annId").val(annId);
-	$("#modaltitle").html("Update Announcement");
-	 $('#addAnnModal').modal('show'); 
-	}
+
 
 </script>

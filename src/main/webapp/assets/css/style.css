@@ -20,7 +20,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      min-height: 100vh;
+      min-height: 60vh;
 }
 
 .form-holder .form-content {
@@ -36,6 +36,7 @@
     -webkit-align-items: center;
     align-items: center;
     padding: 60px;
+    
 }
 
 .form-content .form-items {

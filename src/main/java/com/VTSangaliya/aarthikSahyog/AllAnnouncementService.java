@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AllAnnouncementService {
 private int annId;
-	
+
 	private String name;
 	private String address;
-	
+
 	@Transient
 	private int grandTotal;
 	private String mobile;
@@ -20,7 +20,7 @@ private int annId;
 	private LocalDate addedOn;
 	private char isActive;
      private int id;
-	
+
 	private String receiptNo;
 	private LocalDate receiptDate;
 	private int amount;
@@ -96,7 +96,7 @@ private int annId;
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
-	
+
+
 
 }

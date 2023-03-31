@@ -24,23 +24,28 @@
 
 									<p>Fill in the data below.</p>
 									<form action="${pageContext.request.contextPath}/AdminSaveAndUpdateArthikSahyogReceipt" 
-									method="POST" enctype="multipart/form-data">
+									method="POST" enctype="multipart/form-data" name="myForm">
 
 										<div class="col-md-12">
 										<input class="form-control" type="hidden" name="announceId"
-												placeholder="Full Name" required id="addAnnId">
-											<input class="form-control" type="text" name="receiptNo"
-												placeholder="receipt No" required id="receiptNoE">
+												  id="addAnnId">
+												  
+												<!-- <input class="form-control" type="hidden" name="id"
+												  id="receiptIdE"> -->
+												  
+											<input class="form-control mt-3" type="text" name="receiptNo"
+												placeholder="Enter Receipt No" required id="receiptNoE" style="font-weight: bold;">
+
 
 										</div>
 
 										<div class="col-md-12">
-											<input class="form-control" type="date" name="Date"
+											<input class="form-control mt-3" type="date" name="Date"
 												placeholder="receiptDate" required id="receiptDateE">
 
 										</div>
 										<div class="col-md-12">
-											<input class="form-control" type="number" name="amount"
+											<input class="form-control mt-3" type="number" name="amount"
 												placeholder="amount" required id="amountE">
 
 										</div>
@@ -77,6 +82,7 @@
 	});
 	function addReceipt(annId,name)
 	{
+		
 		$("#receiptNoE").val("");
 		$("#receiptDateE").val("");
 		$("#amountE").val("");
@@ -84,6 +90,23 @@
 		$("#addAnnId").val(annId);
 		$("#addModaltitle").html("Add Receipt- "+name);
 		
+		$('#addReceiptModal').modal('show');
+	}
+	function updateReceipt(annId,id,receiptNo,receiptDate,receiptAmount)
+	{
+		//alert("hello")
+		var x = document.createElement("INPUT");
+x.setAttribute("type", "hidden");
+x.setAttribute("value", id);
+x.setAttribute("name", "id");
+myForm.appendChild(x);
+/* $("#receiptIdE").val(id); */
+		$("#addAnnId").val(annId);
+		
+		$("#receiptNoE").val(receiptNo);
+		$("#receiptDateE").val(receiptDate);
+		$("#amountE").val(receiptAmount);
+		$("#addModaltitle").html("Update Receipt- "+receiptNo);	
 		$('#addReceiptModal').modal('show');
 	}
 </script>

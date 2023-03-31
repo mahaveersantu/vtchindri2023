@@ -20,7 +20,7 @@ public class AarthikSahyogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-	
+
 	private String receiptNo;
 	private LocalDate receiptDate;
 	private int amount;
@@ -34,8 +34,8 @@ public class AarthikSahyogEntity {
 	@JoinColumn(name = "annId")
 	@JsonIgnore
 	private AarthikSahyogAnnouncementEntity aarthikSahyogAnnouncementEntity;
-	
-	
+
+
 	public String getSmsName() {
 		return smsName;
 	}
@@ -48,7 +48,7 @@ public class AarthikSahyogEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getAnnounceId() {
 		return announceId;
 	}
@@ -91,5 +91,5 @@ public class AarthikSahyogEntity {
 	public void setAarthikSahyogAnnouncementEntity(AarthikSahyogAnnouncementEntity aarthikSahyogAnnouncementEntity) {
 		this.aarthikSahyogAnnouncementEntity = aarthikSahyogAnnouncementEntity;
 	}
-	
+
 }

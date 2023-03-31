@@ -26,7 +26,6 @@ import com.VTSangaliya.messages.MessageService;
 import com.VTSangaliya.samitiMember.SamitiMemberEntity;
 import com.VTSangaliya.samitiMember.SamitiMemberRepo;
 import com.VTSangaliya.user.TotalVisitorRepo;
-import com.VTSangaliya.user.TotalVisitorsEntity;
 import com.VTSangaliya.user.UserRepo;
 import com.VTSangaliya.user.VisitorEntity;
 import com.VTSangaliya.user.VisitorRepo;
@@ -67,10 +66,10 @@ public class SessionServices {
 	private HttpServletRequest request;
 	@Autowired
 	private SamitiMemberRepo samitiMemberRepo;
-	
+
 	public void setSession()
 	{
-		
+
 		List<AarthikSahyogAnnouncementEntity> findAll = arthikSahyogAnnouncementRepo
 				.findByIsActiveOrderByAnnounceAmountDesc('Y');
 
@@ -82,7 +81,7 @@ public class SessionServices {
 			});
 
 		}
-		
+
 		List<AarthikSahyogEntity> findAllRuppee = aarthikSahyogRepo.findAll();
 		if (LocalDate.now().getMonthValue() == 1) {
 			year = LocalDate.now().minusYears(1).getYear();
@@ -100,24 +99,24 @@ public class SessionServices {
 			totalLastMonthReceived += shyogEntity.getAmount();
 
 		}
-		
-		
-		
+
+
+
 		List<AarthikSahyogAnnouncementEntity> findAllAnn = arthikSahyogAnnouncementRepo
 				.findByIsActiveOrderByAnnounceAmountDesc('Y');
 		totalAnnounce = 0.0;
 		for (AarthikSahyogAnnouncementEntity aarthikSahyogAnnouncementEntity : findAllAnn) {
 			totalAnnounce += aarthikSahyogAnnouncementEntity.getAnnounceAmount();
 		}
-		
-		
+
+
 		List<ExpenditureEntity> findAllExpd = expenditureRepo.findByIsActiveOrderByExpdAmountDesc('Y');
 		Double totalExpd = 0.0;
 		for (ExpenditureEntity expenditureEntity : findAllExpd) {
 
 			totalExpd += expenditureEntity.getExpdAmount();
 		}
-		
+
 		List<ExpenditureEntity> findAllExpnd = expenditureRepo.findByIsActiveOrderByExpdAmountDesc('Y');
 
 		if (LocalDate.now().minusMonths(1).getMonthValue() == 12) {
@@ -135,10 +134,10 @@ public class SessionServices {
 			totalExpndLastMonth += expenditureEntity.getExpdAmount();
 
 		}
-		
-		
+
+
 		//get top ten
-		
+
 		List<AarthikSahyogAnnouncementEntity> findAllSahyogi = arthikSahyogAnnouncementRepo.findByIsActive('Y');
 		// int i = 0;
 		for (AarthikSahyogAnnouncementEntity aarthikSahyogAnnouncementEntity : findAllSahyogi) {
@@ -154,7 +153,7 @@ public class SessionServices {
 
 		findAll.sort((AarthikSahyogAnnouncementEntity a1, AarthikSahyogAnnouncementEntity a2) -> a2.getGrandTotal()
 				.compareTo(a1.getGrandTotal()));
-		List<AarthikSahyogAnnouncementEntity> topTen = new ArrayList<AarthikSahyogAnnouncementEntity>();
+		List<AarthikSahyogAnnouncementEntity> topTen = new ArrayList<>();
 		int i;
 		for (i = 0; i < 8; i++) {
 			AarthikSahyogAnnouncementEntity obj = new AarthikSahyogAnnouncementEntity();
@@ -163,13 +162,13 @@ public class SessionServices {
 			topTen.add(obj);
 
 		}
-		
+
 		//get visitors
 List<VisitorEntity> findByIpAddress = visitorRepo.findByIpAddress(Utilities.getClientIp(request));
-		
+
 		if(findByIpAddress!=null)
 		{
-			
+
 		}
 		else
 		{
@@ -178,9 +177,9 @@ List<VisitorEntity> findByIpAddress = visitorRepo.findByIpAddress(Utilities.getC
 			visitorRepo.save(visitorObj);
 			visitorObj=null;
 		}
-		
-	
-		
+
+
+
 	 long count = visitorRepo.count();
        HttpSession session =  request.getSession();
 		session.setAttribute("topTen",topTen);
@@ -190,7 +189,7 @@ List<VisitorEntity> findByIpAddress = visitorRepo.findByIpAddress(Utilities.getC
 		session.setAttribute("totalAnnounce",totalAnnounce);
 		session.setAttribute("totalExpd",totalExpd);
 		session.setAttribute("visitors",count);
-		
+
 	}
 	public void setAarthikSahyogAnnouncementSession()
 	{
@@ -210,15 +209,15 @@ List<VisitorEntity> findByIpAddress = visitorRepo.findByIpAddress(Utilities.getC
 			aarthikSahyogAnnouncementEntity.setSrNo(i);
 			aarthikSahyogAnnouncementEntity.setGrandTotal(total);
 		}
-		
+
 		long count = aarthikSahyogRepo.count();
-		
-		
+
+
 		 HttpSession session =  request.getSession();
 			session.setAttribute("allAnnouncement",findAll);
 			session.setAttribute("totalReceipt",count);
 	}
-	
+
 	public void setGairAarthikSahyogSession()
 	{
 		List<GairAarthikSahyogEntity> findAll = gairAarthikRepo.findByIsActiveOrderByApproxCostDesc('Y');
@@ -227,12 +226,12 @@ List<VisitorEntity> findByIpAddress = visitorRepo.findByIpAddress(Utilities.getC
 			i++;
 			gairAarthikSahyogEntity.setSrNo(i);
 		}
-		
-		
+
+
 		HttpSession session =  request.getSession();
 		session.setAttribute("allGairAarthik",findAll);
 	}
-	
+
 	public void setKharchaSession() {
 		List<ExpenditureEntity> findAll = expenditureRepo.findByIsActiveOrderByExpdAmountDesc('Y');
 		int i = 0;
@@ -247,12 +246,12 @@ List<VisitorEntity> findByIpAddress = visitorRepo.findByIpAddress(Utilities.getC
 	}
 	public void setsamitiMemberSession()
 	{
-	
+
 			 List<SamitiMemberEntity> findAllByOrderByMemberPriority = samitiMemberRepo.findAllByOrderByMemberPriority();
 			 HttpSession session =  request.getSession();
 				session.setAttribute("samitiMember",findAllByOrderByMemberPriority);
-		
+
 	}
-	
-	
+
+
 }

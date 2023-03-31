@@ -17,6 +17,7 @@
             <th>बाउचर न </th>
             <th>Amount  </th>
             <th>दिनांक </th>
+            <th>Category </th>
             <th>Action </th>
          </tr>
     </thead>
@@ -32,9 +33,15 @@
             <td>${allExpenditure.expdReceiptNo }</td>
             <td>${allExpenditure.expdAmount }</td>
             <td>${allExpenditure.expdDate }</td>
+            <td>${allExpenditure.expenditureCatEntity.catName }</td>
             <%-- <td><button onclick="editGairAarthik('${allGairAarthik.id }','${allGairAarthik.name }',
             '${allGairAarthik.address }','${allGairAarthik.mobile }','${allGairAarthik.sahyogDetail}')">Edit</button></td> --%>
-       <td>EDIT</td>
+       <td>
+       
+     <button class="btn btn-secondary" onclick="editExpenditure('${allExpenditure.expdId }','${allExpenditure.receiverName }',
+            '${allExpenditure.expdReceiptNo }','${allExpenditure.expdAmount }','${allExpenditure.expdDate}')">Edit</button>
+       
+       </td>
         </tr>
         </c:forEach>
     </tbody>
@@ -48,15 +55,6 @@ $(document).ready( function () {
     
 
 } );
-function editGairAarthik(id,name,address,mobile,sahyog)
-{
-	$("#nameE").val(name);
-	$("#addressE").val(address);
-	$("#mobileE").val(mobile);
-	$("#detailsE").val(sahyog);
-	$("#idE").val(id);
-	$("#modaltitle").html("Update Gair Aarthik");
-	 $('#addGairModal').modal('show'); 
-	}
+
 
 </script>

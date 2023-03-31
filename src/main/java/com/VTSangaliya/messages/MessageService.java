@@ -1,7 +1,6 @@
 package com.VTSangaliya.messages;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import com.mashape.unirest.http.Unirest;
 public class MessageService {
 
 	public Boolean sendMessageToAnnouncement(String name, int amount, String mobile) {
-		Boolean flage = false;
+		boolean flage = false;
 		try {
 			String sender_id = "TEJATC";
 			int message = 137117;
@@ -40,7 +39,7 @@ public class MessageService {
 			String sender_id = "TEJATC";
 			int message = 137278;
 
-			
+
 			// String mobnumber = mobile;
 			Unirest.post("https://www.fast2sms.com/dev/bulkV2")
 					.header("authorization",
@@ -56,7 +55,7 @@ public class MessageService {
 		}
 	}
 
-	
+
 	//send message to samiti member for expenditures
 		public void sendMessageToSamitiMemberForExpenditures(String fname,String sname,Integer amount,Integer boucherNo,String expendFor,String mobile) {
 
@@ -64,7 +63,7 @@ public class MessageService {
 				String sender_id = "TEJATC";
 				int message = 137646;
 
-				
+
 				// String mobnumber = mobile;
 				Unirest.post("https://www.fast2sms.com/dev/bulkV2")
 						.header("authorization",
@@ -79,7 +78,7 @@ public class MessageService {
 				e.getStackTrace();
 			}
 		}
-		
+
 		//send message to pending announcement By admin
 				public void sendMessageToPendingAnnoucementByAdmin(String name,Integer announceAmount,Integer pendingAmount,String mobile) {
 //System.out.println("call send msg method");
@@ -87,17 +86,17 @@ public class MessageService {
 						String sender_id = "TEJATC";
 						int message = 138483;
 
-						
+
 						// String mobnumber = mobile;
 						Unirest.post("https://www.fast2sms.com/dev/bulkV2")
 								.header("authorization",
 										"cDro7ugQejivbRVF8Bftk5G0IUYa3ZXOnM9qSpHT4L6sWCAwPEXZOfWV2joecvmphM8xINd3R6HYauPJ")
 								.header("Content-Type", "application/x-www-form-urlencoded")
-								.body("sender_id=" + sender_id + "&message=" + message + "&variables_values=" + name + "|" 
+								.body("sender_id=" + sender_id + "&message=" + message + "&variables_values=" + name + "|"
 										+ announceAmount + "|" + pendingAmount + "|" + "&route=dlt&numbers=" + mobile)
 								.asString();
 						System.out.println("pending_announce_send_message done");
-						
+
 					} catch (Exception e) {
 						e.getStackTrace();
 					}

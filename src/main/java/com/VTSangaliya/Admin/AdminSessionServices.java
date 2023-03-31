@@ -1,6 +1,5 @@
 package com.VTSangaliya.Admin;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +42,7 @@ public class AdminSessionServices {
 	private TotalVisitorRepo totalVisitorRepo;
 	@Autowired
 	private GairAarthikRepo gairAarthikRepo;
-	
+
 	Double totalLastMonthReceived = 0.0;
 	int pendingAmount = 0;
 	Double totalReceived = 0.0;
@@ -64,7 +63,7 @@ public class AdminSessionServices {
 	private HttpServletRequest request;
 	@Autowired
 	private SamitiMemberRepo samitiMemberRepo;
-	
+
 	public void setAdminAarthikSahyogAnnouncementSession()
 	{
 		List<AarthikSahyogAnnouncementEntity> findAll = arthikSahyogAnnouncementRepo.findByOrderByAddedOn();
@@ -84,39 +83,39 @@ if(aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity()!=null)
 			aarthikSahyogAnnouncementEntity.setSrNo(i);
 			aarthikSahyogAnnouncementEntity.setGrandTotal(total);
 		}
-		 
-		
-		
+
+
+
 		 HttpSession session =  request.getSession();
 			session.setAttribute("allAnnouncement",findAll);
-			
+
 	}
-	
+
 	public void setAdminAarthikSahyogAllReceiptSession()
 	{
 		List<AarthikSahyogEntity> findAll = aarthikSahyogRepo.findAllByOrderByReceiptNo();
-		
+
 		List<AarthikSahyogEntity> findAllSort = findAll
 		        .stream()
 		        .sorted(Comparator.comparing(AarthikSahyogEntity ::getReceiptNo))
 		        .collect(Collectors.toList());
 		 HttpSession session =  request.getSession();
 			session.setAttribute("allReceipt",findAllSort);
-			
+
 	}
 
 	public void setAdminallGairAarthikSession() {
 		List<GairAarthikSahyogEntity> findAll = gairAarthikRepo.findAll();
-		
+
 		HttpSession session =  request.getSession();
 		session.setAttribute("allGairAarthik",findAll);
-		
+
 	}
 	public void setAdminallExpenditure() {
 		List<ExpenditureEntity> findAll = expenditureRepo.findAllByOrderByExpdReceiptNo();
-		
+
 		HttpSession session =  request.getSession();
 		session.setAttribute("allExpenditure",findAll);
-		
+
 	}
 }

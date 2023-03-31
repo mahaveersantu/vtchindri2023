@@ -12,8 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Table(name="tbl_aarthik_sahyog_announcement")
 @Entity
 public class AarthikSahyogAnnouncementEntity {
@@ -21,7 +19,7 @@ public class AarthikSahyogAnnouncementEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int annId;
-	
+
 	private String name;
 	private String address;
 	@Transient
@@ -43,9 +41,9 @@ public class AarthikSahyogAnnouncementEntity {
 	@OneToMany(mappedBy = "aarthikSahyogAnnouncementEntity",cascade = CascadeType.ALL)
 	//@JsonIgnore
 	private List<AarthikSahyogEntity> aarthikSahyogEntity;
-	
-	
-	
+
+
+
 	public String getSmsName() {
 		return smsName;
 	}
@@ -64,8 +62,8 @@ public class AarthikSahyogAnnouncementEntity {
 	public void setAarthikSahyogEntity(List<AarthikSahyogEntity> aarthikSahyogEntity) {
 		this.aarthikSahyogEntity = aarthikSahyogEntity;
 	}
-	
-	
+
+
 	public Integer getGrandTotal() {
 		return grandTotal;
 	}
@@ -78,8 +76,8 @@ public class AarthikSahyogAnnouncementEntity {
 	public void setSrNo(int srNo) {
 		this.srNo = srNo;
 	}
-	
-	
+
+
 	public int getAnnId() {
 		return annId;
 	}
@@ -98,8 +96,8 @@ public class AarthikSahyogAnnouncementEntity {
 	public void setAnnounceAmount(int announceAmount) {
 		this.announceAmount = announceAmount;
 	}
-	
-	
+
+
 	public String getAddress() {
 		return address;
 	}
@@ -136,7 +134,7 @@ public class AarthikSahyogAnnouncementEntity {
 	public void setEncodedString(String encodedString) {
 		this.encodedString = encodedString;
 	}
-	
-	
-	
+
+
+
 }

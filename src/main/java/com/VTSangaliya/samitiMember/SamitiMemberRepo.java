@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SamitiMemberRepo extends JpaRepository<SamitiMemberEntity, Integer> {
 
-	
 
-	
+
+
 
 	List<SamitiMemberEntity> findAllByOrderByMemberPriority();
 

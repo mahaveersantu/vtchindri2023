@@ -54,7 +54,7 @@
 
 	
 <div class="text-center">
-	<button onclick="addCategory()">Add
+	<button onclick="addCategory()" class="btn btn-primary">Add
 		Category</button>
 
 

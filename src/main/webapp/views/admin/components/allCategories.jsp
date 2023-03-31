@@ -33,7 +33,7 @@
             <td>${loop.index+1}</td>
             <td class="name">${allCategories.catName }</td>
             
-            <td><button  id="updateCat" onclick="updateCat('${allCategories.catId }','${allCategories.catName }')">Update
+            <td><button  id="updateCat" class="btn btn-success" onclick="updateCat('${allCategories.catId }','${allCategories.catName }')">Update
 		Category</button></td>
             
          

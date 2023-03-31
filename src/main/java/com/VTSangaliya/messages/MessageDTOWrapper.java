@@ -8,11 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown =true)
 
 public class MessageDTOWrapper {
-	
+
 	@JsonProperty("data")
     private List<MessageDTO> messageDTO;
 
-	
+
 	public List<MessageDTO> getMessageDTO() {
 		return messageDTO;
 	}
@@ -20,7 +20,7 @@ public class MessageDTOWrapper {
 	public void setMessageDTO(List<MessageDTO> messageDTO) {
 		this.messageDTO = messageDTO;
 	}
-	
-	
+
+
 
 }

@@ -23,15 +23,16 @@
 								<div>
 
 									<p>Fill in the data below.</p>
-									<form action="${pageContext.request.contextPath}/saveAndUpdateArthikSahyog" 
-									method="POST" enctype="multipart/form-data">
+									<form
+										action="${pageContext.request.contextPath}/saveAndUpdateArthikSahyog"
+										method="POST" enctype="multipart/form-data" name="myFormAnn">
 
 										<div class="col-md-12">
-										<input class="form-control" type="hidden" name="annId"
-												placeholder="Full Name" required id="annId">
+
 											<input class="form-control" type="text" name="name"
 												placeholder="Full Name" required id="nameE">
 
+											
 										</div>
 
 										<div class="col-md-12">
@@ -50,14 +51,12 @@
 
 										</div>
 										<div class="col-md-12  mt-3">
-											 <input  type="file" placeholder="Photo" 
-											 name="sahyogkrta_photo"
-											 
-											 >
+											<input type="file" placeholder="Photo"
+												name="sahyogkrta_photo">
 										</div>
-									
+
 										<div class="form-button mt-3">
-											<button  type="submit" class="btn btn-primary">Save
+											<button type="submit" class="btn btn-primary">Save
 												Announcement</button>
 										</div>
 									</form>
@@ -75,8 +74,7 @@
 </div>
 
 <div class="text-center">
-	<button onclick="addAnnoucement()">Add
-		Announcement</button>
+	<button class="btn btn-primary" onclick="addAnnoucement()">Add Announcement</button>
 
 
 </div>
@@ -87,18 +85,32 @@
 			backdrop : 'static',
 			keyboard : false
 		})
-		
-		
+
 	});
-	function addAnnoucement()
-	{
+	function addAnnoucement() {
 		$("#nameE").val("");
 		$("#addressE").val("");
 		$("#mobileE").val("");
 		$("#annouceE").val("");
-		$("#annId").val("");
+
 		$("#modaltitle").html("Add Announcement");
-		
+
+		$('#addAnnModal').modal('show');
+	}
+	function updateAnn(annId, name, address, mobile, amount) {
+		$("#nameE").val(name);
+		$("#addressE").val(address);
+		$("#mobileE").val(mobile);
+		$("#annouceE").val(amount);
+		$("#annIdE").val(annId);
+
+		var x = document.createElement("INPUT");
+		x.setAttribute("type", "hidden");
+		x.setAttribute("value", annId);
+		x.setAttribute("name", "annId");
+		myFormAnn.appendChild(x);
+
+		$("#modaltitle").html("Update Announcement");
 		$('#addAnnModal').modal('show');
 	}
 </script>

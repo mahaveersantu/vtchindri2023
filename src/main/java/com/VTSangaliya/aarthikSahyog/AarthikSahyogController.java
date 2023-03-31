@@ -76,7 +76,7 @@ public class AarthikSahyogController {
 	public ResponseEntity<String> deleteAnnouncement(@RequestBody Map<String, Integer> json) {
 		// System.out.println("ann id"+json.get("annId"));
 		// boolean flage=false;
-		if (arthikSahyogAnnouncementRepo.findById(json.get("annId")).get().getAarthikSahyogEntity().size() == 0) 
+		if (arthikSahyogAnnouncementRepo.findById(json.get("annId")).get().getAarthikSahyogEntity().size() == 0)
 		{
 			arthikSahyogAnnouncementRepo.deleteById(json.get("annId"));
 			return new ResponseEntity<>("success", HttpStatus.OK);
@@ -89,7 +89,7 @@ public class AarthikSahyogController {
 	/*
 	 * @RequestMapping("/saveAndUpdateArthikSahyog") public String
 	 * saveAndUpdateArthikSahyog(
-	 * 
+	 *
 	 * @RequestBody AarthikSahyogAnnouncementEntity arthikSahyogAnnouncementEntity)
 	 * { String status; AarthikSahyogAnnouncementEntity saved = new
 	 * AarthikSahyogAnnouncementEntity(); if
@@ -105,12 +105,12 @@ public class AarthikSahyogController {
 	 * arthikSahyogAnnouncementEntity.setAddedOn(aarthikSahyog.getAddedOn()); saved
 	 * = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity); status =
 	 * "success"; }
-	 * 
+	 *
 	 * } else { List<AarthikSahyogAnnouncementEntity> getData =
 	 * arthikSahyogAnnouncementRepo
 	 * .findByMobile(arthikSahyogAnnouncementEntity.getMobile()); if (getData.size()
 	 * == 0) { arthikSahyogAnnouncementEntity.setAddedOn(LocalDate.now());
-	 * 
+	 *
 	 * saved = arthikSahyogAnnouncementRepo.save(arthikSahyogAnnouncementEntity); //
 	 * send sms to sahyogkrta String name = null; String sahyogkrta = null; if
 	 * (arthikSahyogAnnouncementEntity.getSmsName() == null) { name =
@@ -250,7 +250,7 @@ public class AarthikSahyogController {
 
 		findAll.sort((AarthikSahyogAnnouncementEntity a1, AarthikSahyogAnnouncementEntity a2) -> a2.getGrandTotal()
 				.compareTo(a1.getGrandTotal()));
-		List<AarthikSahyogAnnouncementEntity> topTen = new ArrayList<AarthikSahyogAnnouncementEntity>();
+		List<AarthikSahyogAnnouncementEntity> topTen = new ArrayList<>();
 		int i;
 		for (i = 0; i < 10; i++) {
 			AarthikSahyogAnnouncementEntity obj = new AarthikSahyogAnnouncementEntity();
@@ -296,7 +296,7 @@ public class AarthikSahyogController {
 						&& p.getReceiptDate().getMonthValue() == (LocalDate.now().minusMonths(1).getMonthValue()))
 				.collect(Collectors.toList());
 
-		Double total = 0.0;
+		double total = 0.0;
 		for (AarthikSahyogEntity shyogEntity : lastMonthReceived) {
 			// System.out.println(expenditureEntity.getExpdDate());
 			total += shyogEntity.getAmount();
@@ -346,7 +346,6 @@ public class AarthikSahyogController {
 				records.setGrandTotal(total);
 				allRecords.add(records);
 			}
-			;
 			if (aarthikSahyogAnnouncementEntity.getAarthikSahyogEntity().size() == 0) {
 				AllAnnouncementService records = new AllAnnouncementService();
 				records.setAnnId(aarthikSahyogAnnouncementEntity.getAnnId());
@@ -369,16 +368,16 @@ public class AarthikSahyogController {
 		System.out.println("called sendMessage");
 		if(typeId==1)
 		{
-			
-			List<Integer> list = new ArrayList<Integer>();
-			
+
+			List<Integer> list = new ArrayList<>();
+
 			msgDetail.getMessageDTO().forEach(e->{
-			
+
 				list.add(e.getId());
-			
+
 			});
 		List<AarthikSahyogAnnouncementEntity> detailList=arthikSahyogAnnouncementRepo.findByAnnIdIn(list);
-	
+
 		for (AarthikSahyogAnnouncementEntity announce : detailList) {
 			total = 0;
 			announce.getAarthikSahyogEntity().forEach(e -> {
@@ -392,7 +391,7 @@ public class AarthikSahyogController {
 			Integer pendingAmount=annAmount-total;
 			//System.out.println("msg pending amount"+total);
 			String mobile = announce.getMobile();
-			//String mobile = "9511548512";	
+			//String mobile = "9511548512";
 			System.out.println("msg mobile"+mobile);
 			try {
 			messageService.sendMessageToPendingAnnoucementByAdmin(name, annAmount, pendingAmount, mobile);
@@ -400,15 +399,15 @@ public class AarthikSahyogController {
 			catch(Exception e)
 			{
 				e.printStackTrace();
-				return new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
-				
+				return new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+
 			}
 			}
-	
+
 		}
-		return new ResponseEntity<String>("success",HttpStatus.OK);
-		
+		return new ResponseEntity<>("success",HttpStatus.OK);
+
 	}
-	
+
 
 }

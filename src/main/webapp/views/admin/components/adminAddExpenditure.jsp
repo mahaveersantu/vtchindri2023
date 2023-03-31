@@ -1,5 +1,5 @@
 
-<div tabindex="-1" id="addGairModal" class="modal hide fade in">
+<div tabindex="-1" id="addExpdModal" class="modal hide fade in">
 	<div class="modal-dialog">
 		<div class="modal-content modal-body ">
 			<div class="modal-header ">
@@ -24,34 +24,46 @@
 
 									<p>Fill in the data below.</p>
 									<form
-										action="${pageContext.request.contextPath}/adminSaveAndUpdateGairAarthikSahyog"
+										action="${pageContext.request.contextPath}/adminSaveAndUpdateExpenditure"
 										method="POST" enctype="multipart/form-data">
 
 										<div class="col-md-12">
-											<input class="form-control" type="hidden" name="id" id="idE">
-											<input class="form-control" type="text" name="name"
-												placeholder="Full Name" required id="nameE">
+
+											<input class="form-control" type="number"
+												name="expdReceiptNo" placeholder="Bouchar No" required
+												id="receiptE">
 
 										</div>
 
 										<div class="col-md-12">
-											<input class="form-control" type="text" name="address"
-												placeholder="Address" required id="addressE">
+											<!-- <input class="form-control" type="hidden" name="id" id="idE"> -->
+											<input class="form-control mt-3" type="text"
+												name="receiverName" placeholder="Receiver Full Name"
+												required id="nameE" style="font-weight: bold;">
+
+										</div>
+
+										<div class="col-md-12">
+											<input class="form-control mt-3" type="number"
+												name="expdAmount" placeholder="expditure Amount" required
+												id="addressE">
 
 										</div>
 										<div class="col-md-12">
-											<input class="form-control" type="text" name="mobile"
-												placeholder="Mobile No" required id="mobileE">
+											<input class="form-control mt-3" type="date" name="Date"
+												placeholder="expdDate" required id="expdDateE">
 
 										</div>
-										<div class="col-md-12 mt-3">
+										<div class="col-md-12 mt-2">
 											<!-- <input class="form-control" type="text" name="sahyogDetail"
 												placeholder="sahyog-Detail" required id="annouceE"> -->
 
-											<textarea class="form-control" name="sahyogDetail" rows="4"
-												cols="50" placeholder="Sahyog Details..." id="detailsE">
-
-</textarea>
+											<label for="cars">Choose a Category:</label> <select
+												class="form-select" name="catId">
+												<c:forEach items="${allCategories}" var="allCat">
+													<option value="${allCat.catId }" style="font-weight: bold;">${allCat.catName }</option>
+												</c:forEach>
+											</select>
 										</div>
 
 
@@ -74,7 +86,8 @@
 </div>
 
 <div class="text-center">
-	<button onclick="addGairAarthik()">Add Expenditure Details</button>
+	<button class="btn btn-success" onclick="addExpenditure()">Add
+		Expenditure Details</button>
 
 
 </div>
@@ -87,14 +100,18 @@
 		})
 
 	});
-	function addGairAarthik() {
+	function addExpenditure() {
 		$("#nameE").val("");
 		$("#addressE").val("");
 		$("#mobileE").val("");
 		$("#detailsE").val("");
 		$("#idE").val();
-		$("#modaltitle").html("Add Gair Aarthik");
+		$("#modaltitle").html("Add Expenditure");
 
-		$('#addGairModal').modal('show');
+		$('#addExpdModal').modal('show');
+	}
+
+	function editExpenditure(id, name, receipt, amount, date) {
+
 	}
 </script>

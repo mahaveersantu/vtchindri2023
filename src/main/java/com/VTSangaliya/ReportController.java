@@ -23,7 +23,7 @@
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
 //@RestController
 //public class ReportController {
-//	
+//
 //	@Autowired
 //	private ExpenditureCatRepo expenditureCatRepo;
 //	@Autowired
@@ -34,7 +34,7 @@
 //	private AarthikSahyogAnnouncementRepo arthikSahyogAnnouncementRepo;
 //	@Autowired
 //	private AarthikSahyogRepo aarthikSahyogRepo;
-//	
+//
 //	int total = 0;
 //	int pendingAmount = 0;
 //	Double totalReceived = 0.0;
@@ -55,7 +55,7 @@
 //			}
 //			reportService.createExpenditureExcelReport(findAll);
 //			return new ResponseEntity<String>("success",HttpStatus.OK);
-//			
+//
 //		}
 //		if(id==2)//announcement Details excel report
 //		{
@@ -75,25 +75,25 @@
 //				aarthikSahyogAnnouncementEntity.setSrNo(i);
 //				aarthikSahyogAnnouncementEntity.setGrandTotal(total);
 //			}
-//			
-//			
+//
+//
 //			reportService.createAnnouncementExcelReport(findAll);
 //			return new ResponseEntity<String>("success",HttpStatus.OK);
-//			
+//
 //		}
-//		
+//
 //		if(id==3)//receipt Details excel report
 //		{
 //			List<AarthikSahyogEntity> findAll = aarthikSahyogRepo.findAll();
 //			return new ResponseEntity<String>("success",HttpStatus.OK);
 //
 //			}
-//			
-//			
+//
+//
 //		//	reportService.createAnnouncementExcelReport(findAll);
 //		return new ResponseEntity<String>("success",HttpStatus.OK);
 //		}
-//	
+//
 //	}
 //
 //

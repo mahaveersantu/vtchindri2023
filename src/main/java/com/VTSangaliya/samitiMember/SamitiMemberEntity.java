@@ -16,20 +16,20 @@ public class SamitiMemberEntity {
 	private int id;
 	@Transient
 	private int srNo;
-	
+
 	//@Column(name = "name")
 	private String memberName;
 	//@Column(name)
 	@Column(name="expd_msg_send")
 	private char expdMsgSend;
-	
+
 	private String memberAddress;
 	private String memberMobile;
 	private String memberDesig;
 	private int memberPriority;
-	
-	
-	
+
+
+
 	public char getExpdMsgSend() {
 		return expdMsgSend;
 	}
@@ -42,7 +42,7 @@ public class SamitiMemberEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getSrNo() {
 		return srNo;
 	}
@@ -61,7 +61,7 @@ public class SamitiMemberEntity {
 	public void setMemberAddress(String memberAddress) {
 		this.memberAddress = memberAddress;
 	}
-	
+
 	public String getMemberMobile() {
 		return memberMobile;
 	}
@@ -80,5 +80,5 @@ public class SamitiMemberEntity {
 	public void setMemberPriority(int memberPriority) {
 		this.memberPriority = memberPriority;
 	}
-	
+
 }

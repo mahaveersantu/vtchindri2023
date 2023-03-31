@@ -32,7 +32,8 @@
             <td>${allGairAarthik.address }</td>
             <td>${allGairAarthik.mobile }</td>
             <td>${allGairAarthik.sahyogDetail }</td>
-            <td><button onclick="editGairAarthik('${allGairAarthik.id }','${allGairAarthik.name }',
+            <td><button class="btn btn-primary" 
+            onclick="editGairAarthik('${allGairAarthik.id }','${allGairAarthik.name }',
             '${allGairAarthik.address }','${allGairAarthik.mobile }','${allGairAarthik.sahyogDetail}')">Edit</button></td>
         </tr>
         </c:forEach>

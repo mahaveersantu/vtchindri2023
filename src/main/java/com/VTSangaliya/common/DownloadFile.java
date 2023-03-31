@@ -25,11 +25,11 @@ public class DownloadFile {
 		return ResponseEntity.ok().headers(header).contentLength(fileByte.length)
 				.contentType(MediaType.parseMediaType("application/pdf")).body(resource);
 	}
-	
+
 	public ResponseEntity<Resource> DownloadFile(byte[] fileByte, String fileName,String type) {
 
 		ByteArrayResource resource = new ByteArrayResource(fileByte);
-		HttpHeaders header = new HttpHeaders();		
+		HttpHeaders header = new HttpHeaders();
 		//header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=test.zip");
 		if(type.equalsIgnoreCase("pdf"))
 		{
@@ -40,7 +40,7 @@ public class DownloadFile {
 		else if(type.equalsIgnoreCase("jpg") || type.equalsIgnoreCase("jpeg"))
 		{
 			//parseMediaType("image/jpeg")
-			
+
 			header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName + ".jpg");
 			return ResponseEntity.ok().headers(header).contentLength(fileByte.length)
 					.contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);
@@ -51,16 +51,16 @@ public class DownloadFile {
 			return ResponseEntity.ok().headers(header).contentLength(fileByte.length)
 					.contentType(MediaType.parseMediaType("application/zip")).body(resource);
 			}
-		else 
+		else
 		{
 			header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName + ".log");
 			return ResponseEntity.ok().headers(header).contentLength(fileByte.length)
 					.contentType(MediaType.parseMediaType("text/plain")).body(resource);
 			}
 	}
-	
+
 	public Set<String> readFilesFromFolder(String dir) throws IOException {
-		
+
 	    Set<String> fileList = new HashSet<>();
 	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir))) {
 	        for (Path path : stream) {

@@ -1,7 +1,7 @@
 
 <div tabindex="-1" id="addGairModal" class="modal hide fade in">
 	<div class="modal-dialog">
-		<div class="modal-content modal-body ">
+		<div class="modal-content modal-body">
 			<div class="modal-header ">
 				<div class="modal-title d-flex justify-content-center">
 
@@ -51,7 +51,7 @@
 											<textarea class="form-control" name="sahyogDetail" rows="4"
 												cols="50" placeholder="Sahyog Details..." id="detailsE">
 
-</textarea>
+                                         </textarea>
 										</div>
 
 
@@ -74,7 +74,8 @@
 </div>
 
 <div class="text-center">
-	<button onclick="addGairAarthik()">Add Gair Aarthik Details</button>
+	<button class="btn btn-success" onclick="addGairAarthik()">Add
+		Gair Aarthik Details</button>
 
 
 </div>

@@ -21,7 +21,7 @@ public class GairAarthikSahyogEntity {
 	private String sahyogDetail;
 	private int approxCost;
 	private char isActive;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,7 +58,7 @@ public class GairAarthikSahyogEntity {
 	public void setSahyogDetail(String sahyogDetail) {
 		this.sahyogDetail = sahyogDetail;
 	}
-	
+
 	public int getApproxCost() {
 		return approxCost;
 	}
@@ -71,7 +71,7 @@ public class GairAarthikSahyogEntity {
 	public void setIsActive(char isActive) {
 		this.isActive = isActive;
 	}
-	
-	
-	
+
+
+
 }

@@ -20,12 +20,12 @@
 //		http.csrf().disable();
 //		http.cors().disable();
 //	//	http.httpBasic().disable();
-//		
+//
 ////		http.headers().addHeaderWriter(
 ////                new StaticHeadersWriter("Access-Control-Allow-Origin", "*"));
 //	}
 ////	@Bean
-////	  CorsConfigurationSource corsConfigurationSource() 
+////	  CorsConfigurationSource corsConfigurationSource()
 ////	  {
 ////	    CorsConfiguration configuration = new CorsConfiguration();
 ////	    configuration.setAllowedOrigins(Arrays.asList("*"));
@@ -37,7 +37,7 @@
 ////	    source.registerCorsConfiguration("/**", configuration);
 ////	    return source;
 ////	  }
-//	
+//
 ////	 @Bean
 ////	    public CorsConfigurationSource corsConfigurationSource() {
 ////	        final CorsConfiguration configuration = new CorsConfiguration();
@@ -53,6 +53,6 @@
 ////	        source.registerCorsConfiguration("/**", configuration);
 ////	        return source;
 ////	    }
-//	
-//	
+//
+//
 //}

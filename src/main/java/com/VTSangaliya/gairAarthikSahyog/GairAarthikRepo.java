@@ -8,6 +8,6 @@ public interface GairAarthikRepo extends JpaRepository<GairAarthikSahyogEntity, 
 
 	List<GairAarthikSahyogEntity> findByIsActiveOrderByApproxCostDesc(char c);
 
-	
+
 
 }

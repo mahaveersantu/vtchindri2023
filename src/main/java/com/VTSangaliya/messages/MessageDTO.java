@@ -13,8 +13,8 @@ public class MessageDTO {
 	private String mobile;
 	@JsonProperty("tblId")
 	private Integer tblId;
-	
-	
+
+
 	public Integer getTblId() {
 		return tblId;
 	}
@@ -39,6 +39,6 @@ public class MessageDTO {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
+
 
 }

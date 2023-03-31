@@ -22,15 +22,15 @@ public class SamitiMemberController {
 			samitiMemberEntity.setSrNo(i);
 		}
 		 return findAll;
-		
-		
+
+
 	}
 	@RequestMapping("/getAllActiveSamitiMembers")
 	public List<SamitiMemberEntity> getAllActiveSamitiMembers() {
 		 return  samitiMemberRepo.findAllByOrderByMemberPriority();
-		
-		
-		
+
+
+
 	}
 	@PostMapping("/saveAndUpdateSamitiMember")
 	public String saveAndUpdateSamitiMember(@RequestBody SamitiMemberEntity samitiMemberEntity) {
